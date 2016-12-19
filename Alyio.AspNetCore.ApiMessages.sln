@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7F8D494A-254E-40AB-B578-335E674336CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77821EB4-EA48-4FBC-9492-02F312181CF9}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Alyio.AspNetCore.ApiMessages", "src\Alyio.AspNetCore.ApiMessages\Alyio.AspNetCore.ApiMessages.xproj", "{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D} = {7F8D494A-254E-40AB-B578-335E674336CF}
+	EndGlobalSection
+EndGlobal

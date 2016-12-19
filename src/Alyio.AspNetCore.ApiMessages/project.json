@@ -1,0 +1,34 @@
+{
+  "title": "Alyio.AspNetCore.ApiMessages",
+  "version": "1.0.0",
+  "authors": [ "ROY" ],
+  "packOptions": {
+    "projectUrl": "https://github.com/qqbuby/Alyio",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/qqbuby/Alyio"
+    },
+    "licenseUrl": "https://raw.githubusercontent.com/qqbuby/Alyio/dev/LICENSE",
+    "tags": [ "AspNetCore", "Api", "Messages" ]
+  },
+  "copyright": "Copyright (c) 2016 ROY",
+  "buildOptions": {
+    "warningsAsErrors": true
+  },
+
+  "dependencies": {
+    "Microsoft.AspNetCore.Diagnostics": "1.1.0",
+    "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
+    "Microsoft.AspNetCore.Http.Extensions": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.Abstractions": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.1.0",
+    "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+    "Newtonsoft.Json": "9.0.1",
+    "System.Diagnostics.DiagnosticSource": "4.3.0"
+  },
+
+  "frameworks": {
+    "net451": {},
+    "netstandard1.6": {}
+  }
+}
