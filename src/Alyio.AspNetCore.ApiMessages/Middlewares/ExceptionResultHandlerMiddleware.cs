@@ -43,7 +43,7 @@ namespace Alyio.AspNetCore.Middlewares
             }
             catch (Exception ex)
             {
-                _logger.LogError("An unhandled exception has occurred: " + ex.Message, ex);
+                _logger.LogError("An unhandled exception has occurred: {0}{0}{0}", ex.Message, Environment.NewLine, ex);
                 try
                 {
                     context.Response.Clear();
