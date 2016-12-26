@@ -3,12 +3,12 @@
   "version": "1.0.2",
   "authors": [ "ROY" ],
   "packOptions": {
-    "projectUrl": "https://github.com/qqbuby/Alyio",
+    "projectUrl": "https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages",
     "repository": {
       "type": "git",
-      "url": "https://github.com/qqbuby/Alyio"
+      "url": "https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages"
     },
-    "licenseUrl": "https://raw.githubusercontent.com/qqbuby/Alyio/dev/LICENSE",
+    "licenseUrl": "https://raw.githubusercontent.com/qqbuby/Alyio.AspNetCore.ApiMessages/dev/LICENSE",
     "tags": [ "AspNetCore", "Api", "Messages" ]
   },
   "copyright": "Copyright (c) 2016 ROY",
