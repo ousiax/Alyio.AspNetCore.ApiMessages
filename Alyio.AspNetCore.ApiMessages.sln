@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Alyio.AspNetCore.ApiMessages", "src\Alyio.AspNetCore.ApiMessages\Alyio.AspNetCore.ApiMessages.xproj", "{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3F33CA87-D4F4-4B88-ABB0-67E583820DC6}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Alyio.AspNetCore.ApiMessages.Tests", "test\Alyio.AspNetCore.ApiMessages.Tests\Alyio.AspNetCore.ApiMessages.Tests.xproj", "{C639FBFF-C2FC-4626-97EB-6D0D0C9E536A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,11 +26,16 @@ Global
 		{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C639FBFF-C2FC-4626-97EB-6D0D0C9E536A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C639FBFF-C2FC-4626-97EB-6D0D0C9E536A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C639FBFF-C2FC-4626-97EB-6D0D0C9E536A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C639FBFF-C2FC-4626-97EB-6D0D0C9E536A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3A9EE8E2-6F40-4089-80AB-CB7FE269F74D} = {7F8D494A-254E-40AB-B578-335E674336CF}
+		{C639FBFF-C2FC-4626-97EB-6D0D0C9E536A} = {3F33CA87-D4F4-4B88-ABB0-67E583820DC6}
 	EndGlobalSection
 EndGlobal
