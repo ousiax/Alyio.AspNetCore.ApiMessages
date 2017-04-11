@@ -41,36 +41,57 @@ namespace Alyio.AspNetCore.Middlewares
             {
                 await _next.Invoke(context);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                _logger.LogError("An unhandled exception has occurred: {0}{0}{0}", ex.Message, Environment.NewLine, ex);
+                _logger.LogError("An unhandled exception has occurred: {0}{0}{0}", exception.Message, Environment.NewLine, exception);
                 try
                 {
                     context.Response.Clear();
                     var exceptionHandlerFeature = new ExceptionHandlerFeature()
                     {
-                        Error = ex,
+                        Error = exception,
                     };
                     context.Features.Set<IExceptionHandlerFeature>(exceptionHandlerFeature);
-                    context.Response.StatusCode = 500;
-                    context.Response.OnStarting(_clearCacheHeadersDelegate, context.Response);
-                    ApiMessage error = new ApiMessage
+
+                    var error = (ApiMessage)null;
+                    IApiMessage message = exception as IApiMessage;
+                    if (message != null)
                     {
-                        Message = ex.Message,
-                        ExceptionType = ex.GetType().Name,
-                        TraceIdentifier = context.TraceIdentifier
-                    };
-                    if (_hostingEnv.IsDevelopment())
-                    {
-                        error.Detail = ex.ToString();
+                        context.Response.StatusCode = message.StatusCode;
+                        if (message.ApiMessage.TraceIdentifier == null)
+                        {
+                            message.ApiMessage.TraceIdentifier = context.TraceIdentifier;
+                        }
+                        error = message.ApiMessage;
                     }
+                    else
+                    {
+                        context.Response.StatusCode = 500;
+                        context.Response.OnStarting(_clearCacheHeadersDelegate, context.Response);
+                        error = new ApiMessage
+                        {
+                            Message = exception.Message,
+                            ExceptionType = exception.GetType().Name,
+                            TraceIdentifier = context.TraceIdentifier
+                        };
+                        var aggregateException = exception as AggregateException;
+                        if (aggregateException != null)
+                        {
+                            aggregateException.Flatten().Handle(e => { error.Errors.Add(e.Message); return true; });
+                        }
+                        if (_hostingEnv.IsDevelopment())
+                        {
+                            error.Detail = exception.ToString();
+                        }
+                    }
+
                     string errorText = JsonConvert.SerializeObject(error);
                     context.Response.Headers[HeaderNames.ContentType] = "application/json;charset=utf-8";
                     await context.Response.WriteAsync(errorText);
 
                     if (_diagnosticSource.IsEnabled("Microsoft.AspNet.Diagnostics.HandledException"))
                     {
-                        _diagnosticSource.Write("Microsoft.AspNet.Diagnostics.HandledException", new { httpContext = context, exception = ex });
+                        _diagnosticSource.Write("Microsoft.AspNet.Diagnostics.HandledException", new { httpContext = context, exception = exception });
                     }
 
                     return;
