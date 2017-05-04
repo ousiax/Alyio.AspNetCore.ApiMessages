@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace Alyio.AspNetCore.ApiMessages.Tests
@@ -20,7 +19,7 @@ namespace Alyio.AspNetCore.ApiMessages.Tests
                {
                    //var logF = app.ApplicationServices.GetService<ILoggerFactory>();
                    //logF.AddConsole(minLevel: LogLevel.Debug);
-                   app.UseExceptionResultHandler();
+                   app.UseApiMessages();
                    app.Map("/400", x =>
                    {
                        x.Run(h =>

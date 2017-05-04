@@ -9,17 +9,27 @@ namespace Alyio.AspNetCore.ApiMessages
     /// </summary>
     public class NoContentMessage : Exception, IApiMessage
     {
+        /// <summary>
+        /// Initialize a new instance of <see cref="NoContentMessage"/> class.
+        /// </summary>
         public NoContentMessage() : this(XMessage.NoContent)
         {
         }
 
+        /// <summary>
+        /// Initialize a new instance of <see cref="NoContentMessage"/> class.
+        /// </summary>
         public NoContentMessage(string message) : base(message)
         {
             this.ApiMessage = new ApiMessage { Message = message };
         }
 
+        /// <inheritdoc />
         public ApiMessage ApiMessage { get; }
 
+        /// <summary>
+        /// 204
+        /// </summary>
         public int StatusCode { get; } = 204;
     }
 }

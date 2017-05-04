@@ -7,17 +7,27 @@ namespace Alyio.AspNetCore.ApiMessages
     /// </summary>
     public class InternalServerErrorMessage : Exception, IApiMessage
     {
+        /// <summary>
+        /// Initialize a new instance of <see cref="InternalServerErrorMessage"/> class.
+        /// </summary>
         public InternalServerErrorMessage() : this(XMessage.InternalServerError)
         {
         }
 
+        /// <summary>
+        /// Initialize a new instance of <see cref="InternalServerErrorMessage"/> class.
+        /// </summary>
         public InternalServerErrorMessage(string message) : base(message)
         {
             this.ApiMessage = new ApiMessage { Message = message };
         }
 
+        /// <inheritdoc />
         public ApiMessage ApiMessage { get; }
 
+        /// <summary>
+        /// 500
+        /// </summary>
         public int StatusCode { get; } = 500;
     }
 }

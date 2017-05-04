@@ -1,6 +1,6 @@
 {
   "title": "Alyio.AspNetCore.ApiMessages",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "authors": [ "ROY" ],
   "packOptions": {
     "projectUrl": "https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages",
@@ -13,7 +13,8 @@
   },
   "copyright": "Copyright (c) 2016 ROY",
   "buildOptions": {
-    "warningsAsErrors": true
+    "warningsAsErrors": true,
+    "xmlDoc": true
   },
 
   "dependencies": {

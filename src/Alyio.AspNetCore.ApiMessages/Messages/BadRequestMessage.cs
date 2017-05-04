@@ -12,20 +12,32 @@ namespace Alyio.AspNetCore.ApiMessages
     /// </summary>
     public sealed class BadRequestMessage : Exception, IApiMessage
     {
+        /// <summary>
+        /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
+        /// </summary>
         public BadRequestMessage(string message) : base(message)
         {
             this.ApiMessage = new ApiMessage { Message = message };
         }
 
+        /// <summary>
+        /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
+        /// </summary>
         public BadRequestMessage(string message, params string[] errors) : base(message)
         {
             this.ApiMessage = new ApiMessage { Message = message, Errors = errors };
         }
 
+        /// <summary>
+        /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
+        /// </summary>
         public BadRequestMessage(ModelStateDictionary modelState) : this(XMessage.ValidationFailed, modelState)
         {
         }
 
+        /// <summary>
+        /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
+        /// </summary>
         public BadRequestMessage(string message, ModelStateDictionary modelState) : base(message)
         {
             this.ApiMessage = new ApiMessage { Message = message };
@@ -42,8 +54,12 @@ namespace Alyio.AspNetCore.ApiMessages
             }
         }
 
+        /// <inheritdoc />
         public ApiMessage ApiMessage { get; }
 
+        /// <summary>
+        /// 400
+        /// </summary>
         public int StatusCode { get; } = 400;
     }
 }

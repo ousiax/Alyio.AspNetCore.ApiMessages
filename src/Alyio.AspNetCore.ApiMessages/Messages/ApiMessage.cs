@@ -4,6 +4,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace Alyio.AspNetCore.ApiMessages
 {
+    /// <summary>
+    /// Represents a api message.
+    /// </summary>
     public class ApiMessage
     {   /// <summary>
         /// Gets or sets the api message.

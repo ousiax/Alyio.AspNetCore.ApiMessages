@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Alyio.AspNetCore.ApiMessages;
@@ -14,27 +15,35 @@ namespace Alyio.AspNetCore.Middlewares
     /// <summary>
     /// <seealso cref="Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware"/>.
     /// </summary>
-    public sealed class ExceptionResultHandlerMiddleware
+    public sealed class ApiMessageExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionResultHandlerMiddleware> _logger;
+        private readonly ILogger<ApiMessageExceptionHandlerMiddleware> _logger;
         private readonly IHostingEnvironment _hostingEnv;
         private readonly Func<object, Task> _clearCacheHeadersDelegate;
         private readonly DiagnosticSource _diagnosticSource;
 
-        public ExceptionResultHandlerMiddleware(
+        /// <summary>
+        /// Initialize a new instance of <see cref="ApiMessageExceptionHandlerMiddleware"/> class.
+        /// </summary>
+        public ApiMessageExceptionHandlerMiddleware(
             RequestDelegate next,
             ILoggerFactory loggerFactory,
             IHostingEnvironment hostingEnv,
             DiagnosticSource diagnosticSource)
         {
             _next = next;
-            _logger = loggerFactory.CreateLogger<ExceptionResultHandlerMiddleware>();
+            _logger = loggerFactory.CreateLogger<ApiMessageExceptionHandlerMiddleware>();
             _hostingEnv = hostingEnv;
             _clearCacheHeadersDelegate = ClearCacheHeaders;
             _diagnosticSource = diagnosticSource;
         }
 
+        /// <summary>
+        /// Processes unhandled exception and write <see cref="ApiMessage"/> to the current <see cref="HttpContext.Response"/>.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext context)
         {
             try
@@ -72,12 +81,17 @@ namespace Alyio.AspNetCore.Middlewares
                         {
                             Message = exception.Message,
                             ExceptionType = exception.GetType().Name,
-                            TraceIdentifier = context.TraceIdentifier
+                            TraceIdentifier = context.TraceIdentifier,
+                            Errors = new List<string>()
                         };
                         var aggregateException = exception as AggregateException;
                         if (aggregateException != null)
                         {
-                            aggregateException.Flatten().Handle(e => { error.Errors.Add(e.Message); return true; });
+                            aggregateException.Flatten().Handle(e =>
+                            {
+                                error.Errors.Add(e.Message);
+                                return true;
+                            });
                         }
                         if (_hostingEnv.IsDevelopment())
                         {
