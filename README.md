@@ -5,7 +5,7 @@ You can throw any exception during a http context if you want, and if the `IApiM
 
 For example, in a controller action as follow.
 
-``cs
+```cs
 /// <summary
 /// 更新当前登录用户 HMAC 共享私钥 (shared secret).
 /// </summary>
