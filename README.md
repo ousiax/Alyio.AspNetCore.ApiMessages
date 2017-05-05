@@ -24,10 +24,52 @@ public async Task<bool> UpdateHmacInfoAsync([FromRoute] string apiKey)
 }
 ```
 
-The the `InternalServerErrorMessage` has been throwed, `Alyio.AspNetCore.ApiMessages` will produces a response as follow.
+The the `InternalServerErrorMessage` has been throwed, `Alyio.AspNetCore.ApiMessages` will produce a response as follow.
 
-```json
-{"message":"Couldn't get identity name from the current http context.","trace_identifier":"0HL4IU8SD472C"}
+```txt
+HTTP/1.1 500 Internal Server Error
+Date: Fri, 05 May 2017 02:12:53 GMT
+Content-Type: application/json;charset=utf-8
+Server: Kestrel
+Content-Length: 106
+
+{"message":"Couldn't get identity name from the current http context.","trace_identifier":"0HL4JBDTTIC9R"}
+```
+
+For another example, it throws a `UnauthorizedMessage`.
+
+```cs
+/// <summary>
+/// 认证用户的合法性，如过通过则返回用户的登录名(Login Name), 否则认证不通过.
+/// </summary>
+/// <param name="hmacInfo"></param>
+/// <returns></returns>
+[HttpHead]
+public async Task<string> AuthAsync(HmacRequest hmacInfo)
+{
+    if (!ModelState.IsValid)
+    {
+        throw new BadRequestMessage(XMessage.ValidationFailed, ModelState);
+    }
+    var isValid = await _authenticationService.AuthAsync(hmacInfo);
+    if (isValid)
+    {
+        return await _identityNameReadService.ReadAsync(hmacInfo.ApiKey);
+    }
+    else
+    {
+        throw new UnauthorizedMessage();
+    }
+}
+```
+
+And `Alyio.AspNetCore.ApiMessages` will produce this response.
+
+```txt
+HTTP/1.1 401 Unauthorized
+Date: Fri, 05 May 2017 02:07:29 GMT
+Content-Type: application/json;charset=utf-8
+Server: Kestrel
 ```
 
 To use `Alyio.AspNetCore.ApiMessage`, just call `app.UseApiMessages` in `Startup.Configure`.
