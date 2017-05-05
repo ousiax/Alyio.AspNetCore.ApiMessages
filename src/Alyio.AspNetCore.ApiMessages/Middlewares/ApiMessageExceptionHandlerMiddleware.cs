@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Alyio.AspNetCore.ApiMessages;
 using Microsoft.AspNetCore.Diagnostics;
@@ -52,62 +53,32 @@ namespace Alyio.AspNetCore.Middlewares
             }
             catch (Exception exception)
             {
-                _logger.LogError("An unhandled exception has occurred: {0}{0}{0}", exception.Message, Environment.NewLine, exception);
                 try
                 {
                     context.Response.Clear();
-                    var exceptionHandlerFeature = new ExceptionHandlerFeature()
-                    {
-                        Error = exception,
-                    };
-                    context.Features.Set<IExceptionHandlerFeature>(exceptionHandlerFeature);
+                    context.Response.OnStarting(_clearCacheHeadersDelegate, context.Response);
 
-                    var error = (ApiMessage)null;
-                    IApiMessage message = exception as IApiMessage;
-                    if (message != null)
+                    if (exception is IApiMessage)
                     {
-                        context.Response.StatusCode = message.StatusCode;
-                        if (message.ApiMessage.TraceIdentifier == null)
-                        {
-                            message.ApiMessage.TraceIdentifier = context.TraceIdentifier;
-                        }
-                        error = message.ApiMessage;
+                        await WriteApiMessageAsync(context, (IApiMessage)exception);
                     }
                     else
                     {
-                        context.Response.StatusCode = 500;
-                        context.Response.OnStarting(_clearCacheHeadersDelegate, context.Response);
-                        error = new ApiMessage
+                        _logger.LogError("An unhandled exception has occurred: {0}{0}{0}", exception.Message, Environment.NewLine, exception);
+
+                        var exceptionHandlerFeature = new ExceptionHandlerFeature()
                         {
-                            Message = exception.Message,
-                            ExceptionType = exception.GetType().Name,
-                            TraceIdentifier = context.TraceIdentifier,
-                            Errors = new List<string>()
+                            Error = exception,
                         };
-                        var aggregateException = exception as AggregateException;
-                        if (aggregateException != null)
+                        context.Features.Set<IExceptionHandlerFeature>(exceptionHandlerFeature);
+
+                        await WriteUnhandledMessageAsync(context, exception);
+
+                        if (_diagnosticSource.IsEnabled("Microsoft.AspNet.Diagnostics.HandledException"))
                         {
-                            aggregateException.Flatten().Handle(e =>
-                            {
-                                error.Errors.Add(e.Message);
-                                return true;
-                            });
-                        }
-                        if (_hostingEnv.IsDevelopment())
-                        {
-                            error.Detail = exception.ToString();
+                            _diagnosticSource.Write("Microsoft.AspNet.Diagnostics.HandledException", new { httpContext = context, exception = exception });
                         }
                     }
-
-                    string errorText = JsonConvert.SerializeObject(error);
-                    context.Response.Headers[HeaderNames.ContentType] = "application/json;charset=utf-8";
-                    await context.Response.WriteAsync(errorText);
-
-                    if (_diagnosticSource.IsEnabled("Microsoft.AspNet.Diagnostics.HandledException"))
-                    {
-                        _diagnosticSource.Write("Microsoft.AspNet.Diagnostics.HandledException", new { httpContext = context, exception = exception });
-                    }
-
                     return;
                 }
                 catch (Exception ex2)
@@ -116,6 +87,48 @@ namespace Alyio.AspNetCore.Middlewares
                 }
                 throw; // Re-throw the original if we couldn't handle it
             }
+        }
+
+        private async Task WriteUnhandledMessageAsync(HttpContext context, Exception exception)
+        {
+            context.Response.StatusCode = 500;
+            var error = new ApiMessage
+            {
+                Message = exception.Message,
+                ExceptionType = exception.GetType().Name,
+                TraceIdentifier = context.TraceIdentifier,
+                Errors = new List<string>()
+            };
+            var aggregateException = exception as AggregateException;
+            if (aggregateException != null)
+            {
+                aggregateException.Flatten().Handle(e =>
+                {
+                    error.Errors.Add(e.Message);
+                    return true;
+                });
+                error.Errors = error.Errors.Distinct().ToList();
+            }
+            if (_hostingEnv.IsDevelopment())
+            {
+                error.Detail = exception.ToString();
+            }
+
+            string errorText = JsonConvert.SerializeObject(error);
+            context.Response.Headers[HeaderNames.ContentType] = "application/json;charset=utf-8";
+            await context.Response.WriteAsync(errorText);
+        }
+
+        private async Task WriteApiMessageAsync(HttpContext context, IApiMessage message)
+        {
+            context.Response.StatusCode = message.StatusCode;
+            if (message.ApiMessage.TraceIdentifier == null)
+            {
+                message.ApiMessage.TraceIdentifier = context.TraceIdentifier;
+            }
+            string errorText = JsonConvert.SerializeObject(message.ApiMessage);
+            context.Response.Headers[HeaderNames.ContentType] = "application/json;charset=utf-8";
+            await context.Response.WriteAsync(errorText);
         }
 
         private Task ClearCacheHeaders(object state)
