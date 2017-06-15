@@ -1,5 +1,4 @@
-﻿using Alyio.AspNetCore.Middlewares;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 
 namespace Alyio.AspNetCore.ApiMessages
 {
@@ -15,7 +14,7 @@ namespace Alyio.AspNetCore.ApiMessages
         /// <returns></returns>
         public static IApplicationBuilder UseApiMessages(this IApplicationBuilder app)
         {
-            return app.UseMiddleware<ApiMessageExceptionHandlerMiddleware>();
+            return app.UseMiddleware<ApiMessageHandlerMiddleware>();
         }
     }
 }
