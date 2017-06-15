@@ -78,15 +78,6 @@ namespace Alyio.AspNetCore.ApiMessages {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to No Content.
-        /// </summary>
-        public static string NoContent {
-            get {
-                return ResourceManager.GetString("NoContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///    Looks up a localized string similar to Not Acceptable.
         /// </summary>
         public static string NotAcceptable {

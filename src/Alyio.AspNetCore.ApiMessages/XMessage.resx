@@ -123,9 +123,6 @@
   <data name="InternalServerError" xml:space="preserve">
     <value>Internal Server Error</value>
   </data>
-  <data name="NoContent" xml:space="preserve">
-    <value>No Content</value>
-  </data>
   <data name="NotAcceptable" xml:space="preserve">
     <value>Not Acceptable</value>
   </data>

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Alyio.AspNetCore.ApiMessages
 {
     /// <summary>
-    /// Represents a api message that used to produce a Created (201) response..
+    /// Represents a api message that used to produce a Created (201) response.
     /// </summary>
     public sealed class CreatedMessage
     {
