@@ -15,10 +15,11 @@ namespace Alyio.AspNetCore.ApiMessages.Tests
         public async Task ExceptionResultHandlerMiddleware_Test()
         {
             var builder = new WebHostBuilder()
-               .Configure(app =>
+                .Configure(app =>
                {
                    //var logF = app.ApplicationServices.GetService<ILoggerFactory>();
                    //logF.AddConsole(minLevel: LogLevel.Debug);
+                   app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync });
                    app.UseApiMessages();
                    app.Map("/400", x =>
                    {
