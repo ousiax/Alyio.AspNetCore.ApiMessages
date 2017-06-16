@@ -8,7 +8,7 @@ namespace Alyio.AspNetCore.ApiMessages
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
-        /// Adds ApiMessages to the <see cref="IApplicationBuilder"/> request execution pipeline to catch <see cref="IApiMessage"/> exception and write the <see cref="IApiMessage.ApiMessage"/> into <see cref="Microsoft.AspNetCore.Http.HttpContext.Response"/>.
+        /// Adds ApiMessages to the <see cref="IApplicationBuilder"/> request execution pipeline to catch an <see cref="IApiMessage"/> exception and write the <see cref="IApiMessage.ApiMessage"/> into <see cref="Microsoft.AspNetCore.Http.HttpContext.Response"/>.
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
         /// <returns></returns>

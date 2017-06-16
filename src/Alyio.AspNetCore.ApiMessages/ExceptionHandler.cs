@@ -17,10 +17,11 @@ namespace Alyio.AspNetCore.ApiMessages
     public static class ExceptionHandler
     {
         /// <summary>
-        /// <see cref="Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.ExceptionHandler"/>
+        /// Handle a HTTP context exception and write a <see cref="InternalServerErrorMessage"/> into the <see cref="HttpContext.Response"/>.
         /// </summary>
         /// <param name="context">The <see cref="HttpContext"/></param>
         /// <returns></returns>
+        /// <remarks><seealso cref="Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.ExceptionHandler"/>.</remarks>
         public static Task WriteUnhandledMessageAsync(HttpContext context)
         {
             var error = context.Features.Get<IExceptionHandlerFeature>().Error;
