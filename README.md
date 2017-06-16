@@ -3,6 +3,40 @@ The *Alyio.AspNetCore.ApiMessages* provides the mechanism to process unhandled e
 
 You can throw any exception during a http context if you want, and if the `IApiMessage` has been implemented by the exception, `Alyio.AspNetCore.ApiMessages` will produce a response corresponding to.
 
+To use `Alyio.AspNetCore.ApiMessage`, just call `app.UseApiMessageHandler` in `Startup.Configure` as below.
+
+```cs
+using Alyio.AspNetCore.ApiMessages;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddMvc();
+    }
+
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            // Handle a HTTP context exception and write a `InternalServerErrorMessage` into the `HttpContext.Response`.
+            app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync });
+        }
+        // Handle a HTTP context exception that derived with `IApiMessage` and write the `IApiMessage.ApiMessage` into `HttpContext.Response`.
+        app.UseApiMessageHandler(); // 
+        app.UseMvc();
+    }
+}
+```
+
+
 For example, in a controller action as follow.
 
 ```cs
@@ -12,12 +46,12 @@ For example, in a controller action as follow.
 /// <param name="apiKey">A string to identity a HMAC info.</param>
 /// <returns></returns>
 [HttpPut("{apikey}")]
-public async Task<bool> UpdateHmacInfoAsync([FromRoute] string apiKey)
+public async Task<bool> UpdateKeyAsync([FromRoute] string apiKey)
 {
     var loginName = this.HttpContext.User.Identity.Name;
         if (loginName != null)
     {
-            var result = await _hmacInfoUpdateService.UpdateAsync(loginName, apiKey);
+            var result = await _keys.UpdateAsync(loginName, apiKey);
             return result;
     }
     throw new InternalServerErrorMessage("Couldn't get identity name from the current http context.");
@@ -70,20 +104,4 @@ HTTP/1.1 401 Unauthorized
 Date: Fri, 05 May 2017 02:07:29 GMT
 Content-Type: application/json;charset=utf-8
 Server: Kestrel
-```
-
-To use `Alyio.AspNetCore.ApiMessage`, just call `app.UseApiMessages` in `Startup.Configure`.
-
-```cs
-using Alyio.AspNetCore.ApiMessages;
-using Microsoft.AspNetCore.Builder;
-
-sealed class Startup
-{
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app)
-    {
-        app.UseApiMessages();
-    }
-}
 ```
