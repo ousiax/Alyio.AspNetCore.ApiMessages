@@ -20,7 +20,7 @@ namespace Alyio.AspNetCore.ApiMessages.Tests
                    //var logF = app.ApplicationServices.GetService<ILoggerFactory>();
                    //logF.AddConsole(minLevel: LogLevel.Debug);
                    app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync });
-                   app.UseApiMessages();
+                   app.UseApiMessageHandler();
                    app.Map("/400", x =>
                    {
                        x.Run(h =>
