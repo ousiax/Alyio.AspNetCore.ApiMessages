@@ -1,4 +1,7 @@
 # Alyio.AspNetCore.ApiMessages
+
+[![Build Status](https://travis-ci.org/qqbuby/Alyio.AspNetCore.ApiMessages.svg?branch=dev)](https://travis-ci.org/qqbuby/Alyio.AspNetCore.ApiMessages)
+
 The *Alyio.AspNetCore.ApiMessages* provides the mechanism to process unhandled exception occured during a HTTP context.
 
 You can throw any exception during a HTTP context if you want, and if the `IApiMessage` has been implemented by the exception, `Alyio.AspNetCore.ApiMessages` will produce a response corresponding to it.
