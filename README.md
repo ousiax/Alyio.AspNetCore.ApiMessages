@@ -1,7 +1,7 @@
 # Alyio.AspNetCore.ApiMessages
-The *Alyio.AspNetCore.ApiMessages* provides the mechanism to process unhandled excetpion occured during a http context.
+The *Alyio.AspNetCore.ApiMessages* provides the mechanism to process unhandled exception occured during a HTTP context.
 
-You can throw any exception during a http context if you want, and if the `IApiMessage` has been implemented by the exception, `Alyio.AspNetCore.ApiMessages` will produce a response corresponding to.
+You can throw any exception during a HTTP context if you want, and if the `IApiMessage` has been implemented by the exception, `Alyio.AspNetCore.ApiMessages` will produce a response corresponding to it.
 
 To use `Alyio.AspNetCore.ApiMessage`, just call `app.UseApiMessageHandler` in `Startup.Configure` as below.
 
@@ -30,22 +30,17 @@ public class Startup
             app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync });
         }
         // Handle a HTTP context exception that derived with `IApiMessage` and write the `IApiMessage.ApiMessage` into `HttpContext.Response`.
-        app.UseApiMessageHandler(); // 
+        app.UseApiMessageHandler();
         app.UseMvc();
     }
 }
 ```
 
 
-For example, in a controller action as follow.
+For the following example, in a controller action.
 
 ```cs
-/// <summary
-/// 更新当前登录用户 HMAC 共享私钥 (shared secret).
-/// </summary>
-/// <param name="apiKey">A string to identity a HMAC info.</param>
-/// <returns></returns>
-[HttpPut("{apikey}")]
+[HttpPut("{keys}")]
 public async Task<bool> UpdateKeyAsync([FromRoute] string apiKey)
 {
     var loginName = this.HttpContext.User.Identity.Name;
@@ -73,22 +68,17 @@ Content-Length: 106
 For another example, it throws a `UnauthorizedMessage`.
 
 ```cs
-/// <summary>
-/// 认证用户的合法性，如过通过则返回用户的登录名(Login Name), 否则认证不通过.
-/// </summary>
-/// <param name="hmacInfo"></param>
-/// <returns></returns>
 [HttpHead]
-public async Task<string> AuthAsync(HmacRequest hmacInfo)
+public async Task<string> AuthAsync(Request req)
 {
     if (!ModelState.IsValid)
     {
         throw new BadRequestMessage(XMessage.ValidationFailed, ModelState);
     }
-    var isValid = await _authenticationService.AuthAsync(hmacInfo);
+    var isValid = await _authenticationService.AuthAsync(req);
     if (isValid)
     {
-        return await _identityNameReadService.ReadAsync(hmacInfo.ApiKey);
+        return await _identityNameReadService.ReadAsync(req.Key);
     }
     else
     {
