@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Copyright>Copyright (c) 2016 ROY</Copyright>
+    <AssemblyTitle>Alyio.AspNetCore.ApiMessages</AssemblyTitle>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <Authors>ROY</Authors>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>Alyio.AspNetCore.ApiMessages</AssemblyName>
+    <PackageId>Alyio.AspNetCore.ApiMessages</PackageId>
+    <PackageTags>AspNetCore;Api;Messages</PackageTags>
+    <PackageProjectUrl>https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/qqbuby/Alyio.AspNetCore.ApiMessages/dev/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages</RepositoryUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.0" />
+  </ItemGroup>
+
+</Project>

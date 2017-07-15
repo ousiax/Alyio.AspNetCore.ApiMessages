@@ -14,7 +14,7 @@ dotnet restore
 PROJECT_NAME="Alyio.AspNetCore.ApiMessages"
 TEST_PROJECT_NAME="Alyio.AspNetCore.ApiMessages.Tests"
 
-dotnet test ./test/$TEST_PROJECT_NAME -c Release -f netcoreapp1.0
+dotnet test ./test/$TEST_PROJECT_NAME -c Release -f netcoreapp2.0
 
 # dotnet build ./test/$TEST_PROJECT_NAME -c Release -f net451
 
