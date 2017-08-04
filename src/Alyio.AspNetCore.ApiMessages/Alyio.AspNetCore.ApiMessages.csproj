@@ -2,9 +2,9 @@
   <PropertyGroup>
     <Copyright>Copyright (c) 2016 ROY</Copyright>
     <AssemblyTitle>Alyio.AspNetCore.ApiMessages</AssemblyTitle>
-    <VersionPrefix>1.1.1</VersionPrefix>
+    <VersionPrefix>1.1.2</VersionPrefix>
     <Authors>ROY</Authors>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Alyio.AspNetCore.ApiMessages</AssemblyName>
