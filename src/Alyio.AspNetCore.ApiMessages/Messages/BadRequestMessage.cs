@@ -13,6 +13,13 @@ namespace Alyio.AspNetCore.ApiMessages
     public sealed class BadRequestMessage : Exception, IApiMessage
     {
         /// <summary>
+        /// Initialize a new instance of <see cref="BadRequestMessage"/> class with default 'ValidationFailed' message.
+        /// </summary>
+        public BadRequestMessage() : this(XMessage.ValidationFailed)
+        {
+        }
+
+        /// <summary>
         /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
         /// </summary>
         public BadRequestMessage(string message) : base(message)
