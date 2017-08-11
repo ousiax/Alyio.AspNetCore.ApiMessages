@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -8,11 +9,25 @@ namespace Alyio.AspNetCore.ApiMessages
     /// Represents a api message.
     /// </summary>
     public class ApiMessage
-    {   /// <summary>
+    {
+        private string _message;
+
+        /// <summary>
         /// Gets or sets the api message.
         /// </summary>
         [JsonProperty("message", Required = Required.Always)]
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return _message; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException(nameof(value), "The specified string is null, empty, or consists only of white-space characters.");
+                }
+                _message = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a unique identifier to represent this request in trace logs.
