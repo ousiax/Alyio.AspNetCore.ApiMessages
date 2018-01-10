@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
-using Newtonsoft.Json;
 
 namespace Alyio.AspNetCore.ApiMessages
 {
@@ -48,23 +47,11 @@ namespace Alyio.AspNetCore.ApiMessages
                     context.Response.Clear();
                     context.Response.OnStarting(_clearCacheHeadersDelegate, context.Response);
 
-                    await WriteApiMessageAsync(context, message);
+                    await context.WriteApiMessageAsync(message);
                     return;
                 }
                 throw; // Re-throw the original if we couldn't handle it
             }
-        }
-
-        private async Task WriteApiMessageAsync(HttpContext context, IApiMessage message)
-        {
-            context.Response.StatusCode = message.StatusCode;
-            if (message.ApiMessage.TraceIdentifier == null)
-            {
-                message.ApiMessage.TraceIdentifier = context.TraceIdentifier;
-            }
-            string errorText = JsonConvert.SerializeObject(message.ApiMessage);
-            context.Response.Headers[HeaderNames.ContentType] = "application/json;charset=utf-8";
-            await context.Response.WriteAsync(errorText);
         }
 
         private Task ClearCacheHeaders(object state)
