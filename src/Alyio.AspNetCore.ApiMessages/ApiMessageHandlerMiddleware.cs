@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.Net.Http.Headers;
 
 namespace Alyio.AspNetCore.ApiMessages
 {
@@ -10,7 +9,6 @@ namespace Alyio.AspNetCore.ApiMessages
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ApiMessageHandlerMiddleware> _logger;
-        private readonly Func<object, Task> _clearCacheHeadersDelegate;
 
         /// <summary>
         /// Initialize a new instance of <see cref="ApiMessageHandlerMiddleware"/> class.
@@ -19,7 +17,6 @@ namespace Alyio.AspNetCore.ApiMessages
         {
             _next = next;
             _logger = loggerFactory.CreateLogger<ApiMessageHandlerMiddleware>();
-            _clearCacheHeadersDelegate = ClearCacheHeaders;
         }
 
         /// <summary>
@@ -35,33 +32,20 @@ namespace Alyio.AspNetCore.ApiMessages
             }
             catch (Exception ex)
             {
-                var message = ex as IApiMessage;
-                if (message != null)
+                if (ex is IApiMessage message)
                 {
                     // We can't do anything if the response has already started, just abort.
                     if (context.Response.HasStarted)
                     {
-                        _logger.LogWarning("The response has already started, the error handler will not be executed.");
+                        _logger.LogWarning("The response has already started, the API message handler will not be executed.");
                         throw;
                     }
-                    context.Response.Clear();
-                    context.Response.OnStarting(_clearCacheHeadersDelegate, context.Response);
 
                     await context.WriteApiMessageAsync(message);
                     return;
                 }
                 throw; // Re-throw the original if we couldn't handle it
             }
-        }
-
-        private Task ClearCacheHeaders(object state)
-        {
-            var response = (HttpResponse)state;
-            response.Headers[HeaderNames.CacheControl] = "no-cache";
-            response.Headers[HeaderNames.Pragma] = "no-cache";
-            response.Headers[HeaderNames.Expires] = "-1";
-            response.Headers.Remove(HeaderNames.ETag);
-            return Task.FromResult(0);
         }
     }
 }

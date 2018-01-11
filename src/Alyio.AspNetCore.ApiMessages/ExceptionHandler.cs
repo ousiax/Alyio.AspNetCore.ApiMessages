@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Net.Http.Headers;
-using Newtonsoft.Json;
 
 namespace Alyio.AspNetCore.ApiMessages
 {
@@ -26,32 +24,27 @@ namespace Alyio.AspNetCore.ApiMessages
         {
             var error = context.Features.Get<IExceptionHandlerFeature>().Error;
 
-            context.Response.StatusCode = 500;
-            var message = new ApiMessage
-            {
-                Message = error.Message,
-                ExceptionType = error.GetType().Name,
-                TraceIdentifier = context.TraceIdentifier,
-                Errors = new List<string>()
-            };
-            var aggregateException = error as AggregateException;
-            if (aggregateException != null)
+            var message = new InternalServerErrorMessage(error.Message);
+            message.ApiMessage.ExceptionType = error.GetType().Name;
+            message.ApiMessage.TraceIdentifier = context.TraceIdentifier;
+
+            var errors = new List<string>();
+            if (error is AggregateException aggregateException)
             {
                 aggregateException.Flatten().Handle(e =>
                 {
-                    message.Errors.Add(e.Message);
+                    errors.Add(e.Message);
                     return true;
                 });
-                message.Errors = message.Errors.Distinct().ToList();
-            }
-            if (context.RequestServices.GetService<IHostingEnvironment>().IsDevelopment())
-            {
-                message.Detail = error.ToString();
+                message.ApiMessage.Errors = errors.Distinct().ToList();
             }
 
-            string errorText = JsonConvert.SerializeObject(message);
-            context.Response.Headers[HeaderNames.ContentType] = "application/json;charset=utf-8";
-            return context.Response.WriteAsync(errorText);
+            if (context.RequestServices.GetService<IHostingEnvironment>().IsDevelopment())
+            {
+                message.ApiMessage.Detail = error.ToString();
+            }
+
+            return context.WriteApiMessageAsync(message);
         }
     }
 }
