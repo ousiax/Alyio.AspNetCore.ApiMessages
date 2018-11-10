@@ -23,7 +23,7 @@ namespace Alyio.AspNetCore.ApiMessages
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException(nameof(value), "The specified string is null, empty, or consists only of white-space characters.");
+                    throw new ArgumentException("The specified string is null, empty, or consists only of white-space characters.", nameof(value));
                 }
                 _message = value;
             }
