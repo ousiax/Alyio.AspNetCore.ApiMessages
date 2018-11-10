@@ -51,11 +51,12 @@ namespace Alyio.AspNetCore.ApiMessages
             if (modelState.ErrorCount > 0 && this.ApiMessage.Errors == null)
             {
                 this.ApiMessage.Errors = new List<string>();
-                foreach (var stateEntry in modelState.Values)
+                foreach (var key in modelState.Keys)
                 {
+                    var stateEntry = modelState[key];
                     foreach (var error in stateEntry.Errors)
                     {
-                        this.ApiMessage.Errors.Add(error.ErrorMessage);
+                        this.ApiMessage.Errors.Add($"{key}: {error.ErrorMessage}");
                     }
                 }
             }
