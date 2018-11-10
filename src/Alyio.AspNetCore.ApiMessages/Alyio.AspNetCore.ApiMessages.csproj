@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Copyright>Copyright (c) 2016 ROY</Copyright>
     <AssemblyTitle>Alyio.AspNetCore.ApiMessages</AssemblyTitle>
-    <VersionPrefix>2.0.2</VersionPrefix>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <Authors>ROY</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -11,7 +11,10 @@
     <Description>Provides a mechanism to process unhandled exception occured during a HTTP context and write custom API result message.</Description>
     <PackageId>Alyio.AspNetCore.ApiMessages</PackageId>
     <PackageTags>AspNetCore;Api;Messages</PackageTags>
-    <PackageReleaseNotes>Add extension method 'Task WriteApiMessageAsync(this HttpContext context, IApiMessage message)'</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      1. Add ApiMessageFilterAttribute to filter IApiMessage.
+      2. Record ModelState error with 'Key: Message' format.
+    </PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/qqbuby/Alyio.AspNetCore.ApiMessages/dev/LICENSE</PackageLicenseUrl>
