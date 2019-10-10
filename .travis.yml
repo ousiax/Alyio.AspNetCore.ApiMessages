@@ -1,15 +1,14 @@
 language: csharp
-sudo: required
-dist: trusty
-mono: none
-dotnet: 3.0.100
-os:
-  - linux
+services:
+  - docker
 branches:
   only:
     - master
     - release
     - dev
     - /^(.*\/)?ci-.*$/
+before_install:
+  - docker pull mcr.microsoft.com/dotnet/core/sdk:3.0
+  - docker run mcr.microsoft.com/dotnet/core/sdk:3.0 /bin/sh -c "dotnet test"
 script:
-- ./build.sh
+  - dotnet test
