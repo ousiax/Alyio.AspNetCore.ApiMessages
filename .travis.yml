@@ -1,6 +1,7 @@
 language: csharp
 services:
   - docker
+mono: none
 branches:
   only:
     - master
@@ -9,6 +10,6 @@ branches:
     - /^(.*\/)?ci-.*$/
 before_install:
   - docker pull mcr.microsoft.com/dotnet/core/sdk:3.0
-  - docker run mcr.microsoft.com/dotnet/core/sdk:3.0 /bin/sh -c "dotnet test"
 script:
-  - dotnet test
+  - ls -l
+  - docker run --rm -v $PWD:/app -w /app mcr.microsoft.com/dotnet/core/sdk:3.0 /bin/sh -c "dotnet test"
