@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Alyio.AspNetCore.ApiMessages
 {
@@ -11,13 +11,13 @@ namespace Alyio.AspNetCore.ApiMessages
         /// <summary>
         /// Gets or sets a <see cref="string"/> value that identities the unique ID of a resource.
         /// </summary>
-        [JsonProperty("id", Required = Required.Always)]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the HATEOAS resource links.
         /// </summary>
-        [JsonProperty("links", DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("links")]
         public List<Link> Links { get; set; }
     }
 }

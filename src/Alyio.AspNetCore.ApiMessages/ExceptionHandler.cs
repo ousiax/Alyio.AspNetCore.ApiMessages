@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Alyio.AspNetCore.ApiMessages
 {
@@ -39,7 +40,7 @@ namespace Alyio.AspNetCore.ApiMessages
                 message.ApiMessage.Errors = errors.Distinct().ToList();
             }
 
-            if (context.RequestServices.GetService<IHostingEnvironment>().IsDevelopment())
+            if (context.RequestServices.GetService<IWebHostEnvironment>().IsDevelopment())
             {
                 message.ApiMessage.Detail = error.ToString();
             }

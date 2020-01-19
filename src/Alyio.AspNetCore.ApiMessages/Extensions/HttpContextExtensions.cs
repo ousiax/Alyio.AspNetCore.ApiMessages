@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
-using Newtonsoft.Json;
 
 namespace Alyio.AspNetCore.ApiMessages
 {
@@ -11,6 +11,8 @@ namespace Alyio.AspNetCore.ApiMessages
     /// </summary>
     public static class HttpContextExtensions
     {
+        private readonly static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions { IgnoreNullValues = true };
+
         /// <summary>
         /// Write the API message into <see cref="HttpContext"/>.
         /// </summary>
@@ -43,7 +45,7 @@ namespace Alyio.AspNetCore.ApiMessages
                 message.ApiMessage.TraceIdentifier = context.TraceIdentifier;
             }
 
-            string errorText = JsonConvert.SerializeObject(message.ApiMessage);
+            string errorText = JsonSerializer.Serialize(message.ApiMessage, _serializerOptions);
             context.Response.Headers[HeaderNames.ContentType] = "application/json;charset=utf-8";
             return context.Response.WriteAsync(errorText);
         }

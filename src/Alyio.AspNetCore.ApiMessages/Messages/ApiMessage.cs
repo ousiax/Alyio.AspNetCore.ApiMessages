@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Alyio.AspNetCore.ApiMessages
 {
@@ -15,7 +14,7 @@ namespace Alyio.AspNetCore.ApiMessages
         /// <summary>
         /// Gets or sets the api message.
         /// </summary>
-        [JsonProperty("message", Required = Required.Always)]
+        [JsonPropertyName("message")]
         public string Message
         {
             get { return _message; }
@@ -33,25 +32,25 @@ namespace Alyio.AspNetCore.ApiMessages
         /// Gets or sets a unique identifier to represent this request in trace logs.
         /// </summary>
         /// <seealso cref="Microsoft.AspNetCore.Http.HttpContext.TraceIdentifier"/>
-        [JsonProperty("trace_identifier", DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("trace_identifier")]
         public string TraceIdentifier { get; set; }
 
         /// <summary>
         /// Gets or sets the model state errors.
         /// </summary>
-        [JsonProperty("errors", DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("errors")]
         public IList<string> Errors { get; set; }
 
         /// <summary>
         /// Gets or sets the exception type.
         /// </summary>
-        [JsonProperty("exception_type", DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("exception_type")]
         public string ExceptionType { get; set; }
 
         /// <summary>
         /// Gets or sets the exception detail information.
         /// </summary>
-        [JsonProperty("detail", DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("detail")]
         public string Detail { get; set; }
     }
 }

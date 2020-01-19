@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Alyio.AspNetCore.ApiMessages
 {
@@ -10,13 +10,13 @@ namespace Alyio.AspNetCore.ApiMessages
         /// <summary>
         /// Gets or sets a <see cref="string"/> value that identifies the URL of the current resource.
         /// </summary>
-        [JsonProperty("href", Required = Required.Always)]
+        [JsonPropertyName("href")]
         public string Href { get; set; }
 
         /// <summary>
         /// Gets or sets a <see cref="string"/> value that identifies a relationship for a resource. This attribute is itself an object and has “rel” “href” attributes.
         /// </summary>
-        [JsonProperty("rel", Required = Required.Always)]
+        [JsonPropertyName("rel")]
         public string Rel { get; set; }
     }
 }
