@@ -18,7 +18,8 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddMvc();
+        services.AddRouting();
+        services.AddControllers();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -34,7 +35,12 @@ public class Startup
         }
         // Handle a HTTP context exception that derived with `IApiMessage` and write the `IApiMessage.ApiMessage` into `HttpContext.Response`.
         app.UseApiMessageHandler();
-        app.UseMvc();
+
+        app.UseRouting();
+        app.UseEndpoints(ep =>
+        {
+            ep.MapDefaultControllerRoute();
+        });
     }
 }
 ```
