@@ -10,4 +10,4 @@ branches:
 script:
   - ls -l
   - dotnet test
-  - dotnet.exe pack -c release src/Alyio.AspNetCore.ApiMessages/
+  - dotnet pack -c release src/Alyio.AspNetCore.ApiMessages/
