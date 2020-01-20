@@ -1,13 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>Alyio.AspNetCore.ApiMessages.Tests</AssemblyTitle>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>Alyio.AspNetCore.ApiMessages.Tests</AssemblyName>
-    <PackageId>Alyio.AspNetCore.ApiMessages.Tests</PackageId>
-    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/Alyio.AspNetCore.ApiMessages/Alyio.AspNetCore.ApiMessages.csproj" />
