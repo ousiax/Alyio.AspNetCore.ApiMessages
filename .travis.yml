@@ -9,5 +9,5 @@ branches:
     - /^(.*\/)?ci-.*$/
 script:
   - ls -l
-  - dotnet test
+  - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
   - dotnet pack -c release src/Alyio.AspNetCore.ApiMessages/
