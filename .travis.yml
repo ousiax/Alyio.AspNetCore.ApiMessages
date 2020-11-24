@@ -1,6 +1,6 @@
 language: csharp
 mono: none
-dotnet: 5.0.100-preview.4.20258.7
+dotnet: 5.0.100
 branches:
   only:
     - master
