@@ -1,6 +1,6 @@
 # Alyio.AspNetCore.ApiMessages
 
-[![Build Status](https://travis-ci.org/qqbuby/Alyio.AspNetCore.ApiMessages.svg?branch=dev)](https://travis-ci.org/qqbuby/Alyio.AspNetCore.ApiMessages)
+![Build Status](https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages/actions/workflows/ci.yml/badge.svg?branch=dev)
 
 The *Alyio.AspNetCore.ApiMessages* provides the mechanism to process unhandled exception occured during a HTTP context.
 
