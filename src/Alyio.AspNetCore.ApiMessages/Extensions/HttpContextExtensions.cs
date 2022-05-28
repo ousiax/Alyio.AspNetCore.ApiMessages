@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
@@ -11,7 +12,7 @@ namespace Alyio.AspNetCore.ApiMessages
     /// </summary>
     public static class HttpContextExtensions
     {
-        private readonly static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions { IgnoreNullValues = true };
+        private readonly static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
 
         /// <summary>
         /// Write the API message into <see cref="HttpContext"/>.
