@@ -253,3 +253,6 @@ paket-files/
 
 # Tests
 *.opencover.xml
+
+# VS Code
+.vscode/
