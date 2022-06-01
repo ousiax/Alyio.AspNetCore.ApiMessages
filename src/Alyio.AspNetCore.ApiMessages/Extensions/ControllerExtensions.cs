@@ -20,7 +20,7 @@ namespace Alyio.AspNetCore.ApiMessages
         /// <returns>The <see cref="Alyio.AspNetCore.ApiMessages.CreatedMessage"/>.</returns>
         public static CreatedMessage CreatedMessageAtAction(this Controller controller, string actionName, object routeValues, string id)
         {
-            string url = controller.LinkAtAction(actionName, routeValues);
+            string? url = controller.LinkAtAction(actionName, routeValues);
             return controller.CreatedMessage(url, id);
         }
 
@@ -34,7 +34,7 @@ namespace Alyio.AspNetCore.ApiMessages
         /// <returns>The <see cref="Alyio.AspNetCore.ApiMessages.CreatedMessage"/>.</returns>
         public static CreatedMessage CreatedMessageAtRoute(this Controller controller, string routeName, object routeValues, string id)
         {
-            string url = LinkAtRoute(controller, routeName, routeValues);
+            string? url = LinkAtRoute(controller, routeName, routeValues);
             return controller.CreatedMessage(url, id);
         }
 
@@ -45,7 +45,7 @@ namespace Alyio.AspNetCore.ApiMessages
         /// <param name="uri">The URL used to get the entity.</param>
         /// <param name="id">A <see cref="string"/> value to identity the entity.</param>
         /// <returns>The <see cref="Alyio.AspNetCore.ApiMessages.CreatedMessage"/>.</returns>
-        public static CreatedMessage CreatedMessage(this Controller controller, string uri, string id)
+        public static CreatedMessage CreatedMessage(this Controller controller, string? uri, string id)
         {
             controller.Response.StatusCode = 201;
             controller.Response.Headers[HeaderNames.Location] = uri;
@@ -69,7 +69,7 @@ namespace Alyio.AspNetCore.ApiMessages
         /// <param name="routeValues">An object that contains the route values.</param>
         /// <returns>The generated absolute URL.</returns>
         /// <remarks>The protocol and host is obtained from the current request.</remarks>
-        public static string LinkAtRoute(this Controller controller, string routeName, object routeValues)
+        public static string? LinkAtRoute(this Controller controller, string routeName, object routeValues)
         {
             return controller.Url.Link(routeName, routeValues);
         }
@@ -82,7 +82,7 @@ namespace Alyio.AspNetCore.ApiMessages
         /// <param name="routeValues">An object that contains the route values.</param>
         /// <returns>The generated absolute URL.</returns>
         /// <remarks>The protocol and host is obtained from the current request.</remarks>
-        public static string LinkAtAction(this Controller controller, string actionName, object routeValues)
+        public static string? LinkAtAction(this Controller controller, string actionName, object routeValues)
         {
             return controller.Url.Action(
                                new UrlActionContext

@@ -23,7 +23,7 @@ namespace Alyio.AspNetCore.ApiMessages
         /// <remarks><seealso cref="Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.ExceptionHandler"/>.</remarks>
         public static Task WriteUnhandledMessageAsync(HttpContext context)
         {
-            var error = context.Features.Get<IExceptionHandlerFeature>().Error;
+            var error = context.Features.Get<IExceptionHandlerFeature>()!.Error;
 
             var message = new InternalServerErrorMessage(error.Message);
             message.ApiMessage.ExceptionType = error.GetType().Name;

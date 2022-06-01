@@ -12,7 +12,7 @@ namespace WebApplication1.Controllers
     {
         [ApiMessageFilter]
         [HttpPost]
-        public void Post([FromBody]Staff staff)
+        public void Post([FromBody] Staff staff)
         {
             if (!ModelState.IsValid)
             {
@@ -21,7 +21,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPut]
-        public void Put([FromBody]Staff staff)
+        public void Put([FromBody] Staff staff)
         {
             if (!ModelState.IsValid)
             {
@@ -34,10 +34,10 @@ namespace WebApplication1.Controllers
     {
         [Required]
         [MaxLength(2)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [Required]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [Range(10, 30)]
         public int Age { get; set; }

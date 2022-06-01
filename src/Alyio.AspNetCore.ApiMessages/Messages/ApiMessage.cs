@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
 namespace Alyio.AspNetCore.ApiMessages
@@ -9,6 +10,7 @@ namespace Alyio.AspNetCore.ApiMessages
     /// </summary>
     public class ApiMessage
     {
+        [MaybeNull]
         private string _message;
 
         /// <summary>
@@ -17,7 +19,7 @@ namespace Alyio.AspNetCore.ApiMessages
         [JsonPropertyName("message")]
         public string Message
         {
-            get { return _message; }
+            get { return _message!; }
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -33,24 +35,24 @@ namespace Alyio.AspNetCore.ApiMessages
         /// </summary>
         /// <seealso cref="Microsoft.AspNetCore.Http.HttpContext.TraceIdentifier"/>
         [JsonPropertyName("trace_identifier")]
-        public string TraceIdentifier { get; set; }
+        public string? TraceIdentifier { get; set; }
 
         /// <summary>
         /// Gets or sets the model state errors.
         /// </summary>
         [JsonPropertyName("errors")]
-        public IList<string> Errors { get; set; }
+        public IList<string>? Errors { get; set; }
 
         /// <summary>
         /// Gets or sets the exception type.
         /// </summary>
         [JsonPropertyName("exception_type")]
-        public string ExceptionType { get; set; }
+        public string? ExceptionType { get; set; }
 
         /// <summary>
         /// Gets or sets the exception detail information.
         /// </summary>
         [JsonPropertyName("detail")]
-        public string Detail { get; set; }
+        public string? Detail { get; set; }
     }
 }

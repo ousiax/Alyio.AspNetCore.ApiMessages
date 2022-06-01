@@ -11,12 +11,12 @@ namespace Alyio.AspNetCore.ApiMessages
         /// Gets or sets a <see cref="string"/> value that identifies the URL of the current resource.
         /// </summary>
         [JsonPropertyName("href")]
-        public string Href { get; set; }
+        public string? Href { get; set; }
 
         /// <summary>
         /// Gets or sets a <see cref="string"/> value that identifies a relationship for a resource. This attribute is itself an object and has “rel” “href” attributes.
         /// </summary>
         [JsonPropertyName("rel")]
-        public string Rel { get; set; }
+        public string? Rel { get; set; }
     }
 }

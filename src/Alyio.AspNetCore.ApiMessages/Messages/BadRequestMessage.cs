@@ -54,7 +54,7 @@ namespace Alyio.AspNetCore.ApiMessages
                 foreach (var key in modelState.Keys)
                 {
                     var stateEntry = modelState[key];
-                    foreach (var error in stateEntry.Errors)
+                    foreach (var error in stateEntry!.Errors)
                     {
                         this.ApiMessage.Errors.Add($"{key}: {error.ErrorMessage}");
                     }

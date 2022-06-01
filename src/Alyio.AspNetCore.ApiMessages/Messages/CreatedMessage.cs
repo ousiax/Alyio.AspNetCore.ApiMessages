@@ -12,12 +12,12 @@ namespace Alyio.AspNetCore.ApiMessages
         /// Gets or sets a <see cref="string"/> value that identities the unique ID of a resource.
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// Gets or sets the HATEOAS resource links.
         /// </summary>
         [JsonPropertyName("links")]
-        public List<Link> Links { get; set; }
+        public List<Link>? Links { get; set; }
     }
 }
