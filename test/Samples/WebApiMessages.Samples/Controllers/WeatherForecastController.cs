@@ -26,7 +26,7 @@ public class WeatherForecastController : ControllerBase
 
     [HttpGet("{id}")]
     [ActionName(nameof(GetWeatherForecastAsync))]
-    public async Task<ActionResult<WeatherForecast>> GetWeatherForecastAsync([FromRoute] int id)
+    public async Task<ActionResult<WeatherForecast>> GetWeatherForecastAsync(int id)
     {
         if (_context.WeatherForecasts is null)
         {

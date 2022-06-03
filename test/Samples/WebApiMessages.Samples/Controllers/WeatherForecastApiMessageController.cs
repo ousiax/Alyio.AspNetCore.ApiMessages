@@ -36,8 +36,13 @@ public class WeatherForecastApiMessageController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<CreatedMessage> PostWeatherForecastAsync(WeatherForecast weather)
+    public async Task<CreatedMessage> PostWeatherForecastAsync([FromBody] WeatherForecast weather)
     {
+        if (!ModelState.IsValid)
+        {
+            throw new BadRequestMessage(ModelState);
+        }
+
         _ = _context.WeatherForecasts ?? throw new InternalServerErrorMessage("Entity set 'WeatherForecastDbContext.WeatherForecasts'  is null.");
 
         await _context.WeatherForecasts.AddAsync(weather);
@@ -47,11 +52,16 @@ public class WeatherForecastApiMessageController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task PutWeatherForecastAsync(int id, WeatherForecast weather)
+    public async Task PutWeatherForecastAsync([FromRoute] int id, [FromBody] WeatherForecast weather)
     {
         if (id != weather.Id)
         {
             throw new BadRequestMessage();
+        }
+
+        if (!ModelState.IsValid)
+        {
+            throw new BadRequestMessage(ModelState);
         }
 
         _ = _context.WeatherForecasts ?? throw new NotFoundMessage();
@@ -70,7 +80,7 @@ public class WeatherForecastApiMessageController : ControllerBase
 
 
     [HttpDelete("{id}")]
-    public async Task DeleteWeatherForecastAsync(int id)
+    public async Task DeleteWeatherForecastAsync([FromRoute] int id)
     {
         _ = _context.WeatherForecasts ?? throw new NotFoundMessage();
 

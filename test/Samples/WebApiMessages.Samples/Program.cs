@@ -16,8 +16,8 @@ builder.Services.Configure<ApiBehaviorOptions>(opt =>
     };
 });
 
-builder.Services.AddDbContext<WeatherForecastDbContext>(opt =>
-    opt.UseInMemoryDatabase("WeatherForecast"));
+#pragma warning disable ASP0000
+builder.Services.AddDbContext<WeatherForecastDbContext>(opt => opt.UseInMemoryDatabase("WeatherForecast"));
 using (var services = builder.Services.BuildServiceProvider())
 {
     using (var context = services.GetRequiredService<WeatherForecastDbContext>())
@@ -37,6 +37,7 @@ using (var services = builder.Services.BuildServiceProvider())
         await context.SaveChangesAsync();
     }
 }
+#pragma warning restore ASP0000
 
 // builder.Services.AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
 builder.Services.AddControllers();
