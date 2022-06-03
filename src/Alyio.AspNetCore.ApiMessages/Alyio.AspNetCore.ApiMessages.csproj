@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Copyright>Copyright (c) 2016 ROY</Copyright>
     <AssemblyTitle>Alyio.AspNetCore.ApiMessages</AssemblyTitle>
-    <VersionPrefix>6.0.0</VersionPrefix>
+    <VersionPrefix>6.0.1</VersionPrefix>
     <Authors>ROY</Authors>
     <TargetFrameworks>net6.0</TargetFrameworks>
     <Nullable>enable</Nullable>
@@ -12,9 +12,7 @@
     <Description>Provides a mechanism to process unhandled exception occured during a HTTP context and write custom API result message.</Description>
     <PackageId>Alyio.AspNetCore.ApiMessages</PackageId>
     <PackageTags>AspNetCore;Api;Messages</PackageTags>
-    <PackageReleaseNotes>
-      1. Migrate from .NET 5.0 to .NET 6.0
-    </PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
