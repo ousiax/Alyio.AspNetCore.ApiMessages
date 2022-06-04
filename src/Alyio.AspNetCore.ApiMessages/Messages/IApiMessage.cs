@@ -1,18 +1,18 @@
-﻿namespace Alyio.AspNetCore.ApiMessages
+﻿namespace Alyio.AspNetCore.ApiMessages;
+
+/// <summary>
+/// Represents an <see cref="IApiMessage"/> interface.
+/// </summary>
+public interface IApiMessage
 {
     /// <summary>
-    /// Represents an <see cref="IApiMessage"/> interface.
+    /// Gets the  status code defined for HTTP.
     /// </summary>
-    public interface IApiMessage
-    {
-        /// <summary>
-        /// Gets the  status code defined for HTTP.
-        /// </summary>
-        int StatusCode { get; }
+    int StatusCode { get; }
 
-        /// <summary>
-        /// Gets the <see cref="ApiMessage"/>.
-        /// </summary>
-        ApiMessage ApiMessage { get; }
-    }
+    /// <summary>
+    /// Gets the <see cref="ApiMessage"/>.
+    /// </summary>
+    ApiMessage ApiMessage { get; }
 }
+

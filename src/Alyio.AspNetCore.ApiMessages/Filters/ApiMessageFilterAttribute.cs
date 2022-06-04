@@ -3,28 +3,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Alyio.AspNetCore.ApiMessages.Filters
+namespace Alyio.AspNetCore.ApiMessages.Filters;
+
+/// <summary>
+/// Represents an exception filter to handler <see cref="IApiMessage"/> message and writes <see cref="IApiMessage.ApiMessage"/> to the current http response.
+/// </summary>
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+public class ApiMessageFilterAttribute : ExceptionFilterAttribute
 {
     /// <summary>
-    /// Represents an exception filter to handler <see cref="IApiMessage"/> message and writes <see cref="IApiMessage.ApiMessage"/> to the current http response.
+    /// Writes the API message into <see cref="HttpContext"/>.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class ApiMessageFilterAttribute : ExceptionFilterAttribute
+    /// <param name="context"><see cref="ExceptionContext"/>.</param>
+    /// <returns></returns>
+    public override Task OnExceptionAsync(ExceptionContext context)
     {
-        /// <summary>
-        /// Writes the API message into <see cref="HttpContext"/>.
-        /// </summary>
-        /// <param name="context"><see cref="ExceptionContext"/>.</param>
-        /// <returns></returns>
-        public override Task OnExceptionAsync(ExceptionContext context)
+        if (!context.HttpContext.Response.HasStarted && context.Exception is IApiMessage message)
         {
-            if (!context.HttpContext.Response.HasStarted && context.Exception is IApiMessage message)
-            {
-                context.ExceptionHandled = true;
-                return context.HttpContext.WriteApiMessageAsync(message);
-            }
-
-            return Task.CompletedTask;
+            context.ExceptionHandled = true;
+            return context.HttpContext.WriteApiMessageAsync(message);
         }
+
+        return Task.CompletedTask;
     }
 }
