@@ -11,21 +11,22 @@ public class InternalServerErrorMessage : Exception, IApiMessage
     /// <summary>
     /// Initialize a new instance of <see cref="InternalServerErrorMessage"/> class.
     /// </summary>
-    public InternalServerErrorMessage() : this(XMessage.InternalServerError)
+    public InternalServerErrorMessage()
     {
+        this.ProblemDetails = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.InternalServerError,
+            Title = XMessage.InternalServerError,
+            Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1",
+        };
     }
 
     /// <summary>
     /// Initialize a new instance of <see cref="InternalServerErrorMessage"/> class.
     /// </summary>
-    public InternalServerErrorMessage(string message) : base(message)
+    public InternalServerErrorMessage(string detail) : this()
     {
-        this.ProblemDetails = new ProblemDetails
-        {
-            Status = (int)HttpStatusCode.InternalServerError,
-            Title = message,
-            Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1",
-        };
+        this.ProblemDetails.Detail = detail;
     }
 
     /// <inheritdoc />

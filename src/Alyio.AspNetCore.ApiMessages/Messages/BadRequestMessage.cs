@@ -16,18 +16,11 @@ public sealed class BadRequestMessage : Exception, IApiMessage
     /// <summary>
     /// Initialize a new instance of <see cref="BadRequestMessage"/> class with default 'ValidationFailed' message.
     /// </summary>
-    public BadRequestMessage() : this(XMessage.ValidationFailed)
-    {
-    }
-
-    /// <summary>
-    /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
-    /// </summary>
-    public BadRequestMessage(string message) : base(message)
+    public BadRequestMessage()
     {
         this.ProblemDetails = new ProblemDetails
         {
-            Title = message,
+            Title = XMessage.ValidationFailed,
             Status = (int)HttpStatusCode.BadRequest,
         };
     }
@@ -35,7 +28,15 @@ public sealed class BadRequestMessage : Exception, IApiMessage
     /// <summary>
     /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
     /// </summary>
-    public BadRequestMessage(string message, params string[] errors) : this(message)
+    public BadRequestMessage(string detail) : this()
+    {
+        this.ProblemDetails.Detail = detail;
+    }
+
+    /// <summary>
+    /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
+    /// </summary>
+    public BadRequestMessage(string detail, params string[] errors) : this(detail)
     {
         this.ProblemDetails.Extensions["errors"] = errors;
     }
@@ -43,14 +44,14 @@ public sealed class BadRequestMessage : Exception, IApiMessage
     /// <summary>
     /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
     /// </summary>
-    public BadRequestMessage(ModelStateDictionary modelState) : this(XMessage.ValidationFailed, modelState)
+    public BadRequestMessage(ModelStateDictionary modelState) : this(null!, modelState)
     {
     }
 
     /// <summary>
     /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
     /// </summary>
-    public BadRequestMessage(string message, ModelStateDictionary modelState) : this(message)
+    public BadRequestMessage(string detail, ModelStateDictionary modelState) : this(detail)
     {
         if (modelState.ErrorCount > 0)
         {

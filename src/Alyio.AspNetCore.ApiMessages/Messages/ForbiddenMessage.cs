@@ -11,21 +11,22 @@ public sealed class ForbiddenMessage : Exception, IApiMessage
     /// <summary>
     /// Initialize a new instance of <see cref="ForbiddenMessage"/> class.
     /// </summary>
-    public ForbiddenMessage() : this(XMessage.Forbidden)
+    public ForbiddenMessage()
     {
+        this.ProblemDetails = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.Forbidden,
+            Title = XMessage.Forbidden,
+            Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.3",
+        };
     }
 
     /// <summary>
     /// Initialize a new instance of <see cref="ForbiddenMessage"/> class.
     /// </summary>
-    public ForbiddenMessage(string message) : base(message)
+    public ForbiddenMessage(string detail) : this()
     {
-        this.ProblemDetails = new ProblemDetails
-        {
-            Status = (int)HttpStatusCode.Forbidden,
-            Title = message,
-            Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.3",
-        };
+        this.ProblemDetails.Detail = detail;
     }
 
     /// <inheritdoc />

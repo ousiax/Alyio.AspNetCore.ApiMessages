@@ -11,21 +11,22 @@ public class NotFoundMessage : Exception, IApiMessage
     /// <summary>
     /// Initialize a new instance of <see cref="NotFoundMessage"/> class.
     /// </summary>
-    public NotFoundMessage() : this(XMessage.NotFound)
+    public NotFoundMessage()
     {
+        this.ProblemDetails = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.NotFound,
+            Title = XMessage.NotFound,
+            Type = "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+        };
     }
 
     /// <summary>
     /// Initialize a new instance of <see cref="NotFoundMessage"/> class.
     /// </summary>
-    public NotFoundMessage(string message) : base(message)
+    public NotFoundMessage(string detail) : this()
     {
-        this.ProblemDetails = new ProblemDetails
-        {
-            Status = (int)HttpStatusCode.NotFound,
-            Title = message,
-            Type = "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-        };
+        this.ProblemDetails.Detail = detail;
     }
 
     /// <inheritdoc />

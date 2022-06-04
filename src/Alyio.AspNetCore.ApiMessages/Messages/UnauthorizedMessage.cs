@@ -13,21 +13,22 @@ public sealed class UnauthorizedMessage : Exception, IApiMessage
     /// <summary>
     /// Initialize a new instance of <see cref="UnauthorizedMessage"/> class.
     /// </summary>
-    public UnauthorizedMessage() : this(XMessage.Unauthorized)
+    public UnauthorizedMessage()
     {
+        this.ProblemDetails = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.Unauthorized,
+            Title = XMessage.Unauthorized,
+            Type = "https://datatracker.ietf.org/doc/html/rfc7235#section-3.1",
+        };
     }
 
     /// <summary>
     /// Initialize a new instance of <see cref="UnauthorizedMessage"/> class.
     /// </summary>
-    public UnauthorizedMessage(string message) : base(message)
+    public UnauthorizedMessage(string detail) : this()
     {
-        this.ProblemDetails = new ProblemDetails
-        {
-            Status = (int)HttpStatusCode.Unauthorized,
-            Title = message,
-            Type = "https://datatracker.ietf.org/doc/html/rfc7235#section-3.1",
-        };
+        this.ProblemDetails.Detail = detail;
     }
 
     /// <inheritdoc />
