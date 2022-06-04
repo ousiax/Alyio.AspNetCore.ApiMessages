@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApiMessages.Samples.Models;
 
-public class WeatherForecast
+public record WeatherForecast
 {
     public int Id { get; set; }
 

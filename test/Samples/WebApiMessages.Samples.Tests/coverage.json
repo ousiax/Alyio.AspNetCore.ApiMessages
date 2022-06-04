@@ -1,0 +1,1501 @@
+{
+  "Alyio.AspNetCore.ApiMessages.dll": {
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/ApiMessageHandlerMiddleware.cs": {
+      "Alyio.AspNetCore.ApiMessages.ApiMessageHandlerMiddleware": {
+        "System.Void Alyio.AspNetCore.ApiMessages.ApiMessageHandlerMiddleware::.ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILoggerFactory)": {
+          "Lines": {
+            "16": 2,
+            "17": 2,
+            "18": 2,
+            "19": 2,
+            "20": 2
+          },
+          "Branches": []
+        }
+      },
+      "Alyio.AspNetCore.ApiMessages.ApiMessageHandlerMiddleware/<Invoke>d__3": {
+        "System.Void Alyio.AspNetCore.ApiMessages.ApiMessageHandlerMiddleware/<Invoke>d__3::MoveNext()": {
+          "Lines": {
+            "28": 5,
+            "30": 5,
+            "31": 5,
+            "32": 4,
+            "33": 1,
+            "34": 1,
+            "35": 1,
+            "36": 1,
+            "38": 1,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "44": 1,
+            "45": 1,
+            "47": 0,
+            "49": 5
+          },
+          "Branches": [
+            {
+              "Line": 35,
+              "Offset": 240,
+              "EndOffset": 245,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 38,
+              "Offset": 266,
+              "EndOffset": 268,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 38,
+              "Offset": 266,
+              "EndOffset": 334,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            },
+            {
+              "Line": 35,
+              "Offset": 240,
+              "EndOffset": 447,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/ExceptionHandler.cs": {
+      "Alyio.AspNetCore.ApiMessages.ExceptionHandler": {
+        "System.Threading.Tasks.Task Alyio.AspNetCore.ApiMessages.ExceptionHandler::WriteUnhandledMessageAsync(Microsoft.AspNetCore.Http.HttpContext)": {
+          "Lines": {
+            "25": 0,
+            "26": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "48": 0,
+            "49": 0
+          },
+          "Branches": [
+            {
+              "Line": 33,
+              "Offset": 103,
+              "EndOffset": 105,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 33,
+              "Offset": 103,
+              "EndOffset": 159,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 179,
+              "EndOffset": 181,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 179,
+              "EndOffset": 201,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Extensions/ApplicationBuilderExtensions.cs": {
+      "Alyio.AspNetCore.ApiMessages.ApplicationBuilderExtensions": {
+        "Microsoft.AspNetCore.Builder.IApplicationBuilder Alyio.AspNetCore.ApiMessages.ApplicationBuilderExtensions::UseApiMessageHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder)": {
+          "Lines": {
+            "16": 2,
+            "17": 2,
+            "18": 2
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Extensions/ControllerExtensions.cs": {
+      "Alyio.AspNetCore.ApiMessages.ControllerExtensions": {
+        "Alyio.AspNetCore.ApiMessages.CreatedMessage Alyio.AspNetCore.ApiMessages.ControllerExtensions::CreatedMessageAtAction(Microsoft.AspNetCore.Mvc.ControllerBase,System.String,System.Object,System.String)": {
+          "Lines": {
+            "22": 1,
+            "23": 1,
+            "24": 1,
+            "25": 1
+          },
+          "Branches": []
+        },
+        "Alyio.AspNetCore.ApiMessages.CreatedMessage Alyio.AspNetCore.ApiMessages.ControllerExtensions::CreatedMessageAtRoute(Microsoft.AspNetCore.Mvc.ControllerBase,System.String,System.Object,System.String)": {
+          "Lines": {
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0
+          },
+          "Branches": []
+        },
+        "Alyio.AspNetCore.ApiMessages.CreatedMessage Alyio.AspNetCore.ApiMessages.ControllerExtensions::CreatedMessage(Microsoft.AspNetCore.Mvc.ControllerBase,System.String,System.String)": {
+          "Lines": {
+            "49": 1,
+            "50": 1,
+            "51": 1,
+            "52": 1,
+            "53": 1,
+            "54": 1,
+            "55": 1,
+            "56": 1,
+            "57": 1,
+            "58": 1,
+            "59": 1,
+            "60": 1,
+            "61": 1,
+            "62": 1
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.ControllerExtensions::LinkAtRoute(Microsoft.AspNetCore.Mvc.ControllerBase,System.String,System.Object)": {
+          "Lines": {
+            "73": 0,
+            "74": 0,
+            "75": 0
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.ControllerExtensions::LinkAtAction(Microsoft.AspNetCore.Mvc.ControllerBase,System.String,System.Object)": {
+          "Lines": {
+            "86": 1,
+            "87": 1,
+            "88": 1,
+            "89": 1,
+            "90": 1,
+            "91": 1,
+            "92": 1,
+            "93": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Extensions/HttpContextExtensions.cs": {
+      "Alyio.AspNetCore.ApiMessages.HttpContextExtensions": {
+        "System.Threading.Tasks.Task Alyio.AspNetCore.ApiMessages.HttpContextExtensions::WriteApiMessageAsync(Microsoft.AspNetCore.Http.HttpContext,Alyio.AspNetCore.ApiMessages.IApiMessage,System.Boolean)": {
+          "Lines": {
+            "26": 1,
+            "27": 1,
+            "28": 0,
+            "29": 0,
+            "32": 1,
+            "33": 0,
+            "34": 0,
+            "37": 1,
+            "38": 1,
+            "39": 1,
+            "40": 1,
+            "41": 1,
+            "43": 1,
+            "44": 1,
+            "45": 1,
+            "46": 1,
+            "47": 1,
+            "49": 1,
+            "50": 1,
+            "51": 1,
+            "52": 1
+          },
+          "Branches": [
+            {
+              "Line": 27,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 7,
+              "EndOffset": 21,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 32,
+              "Offset": 27,
+              "EndOffset": 29,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 32,
+              "Offset": 27,
+              "EndOffset": 41,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            },
+            {
+              "Line": 38,
+              "Offset": 56,
+              "EndOffset": 58,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 38,
+              "Offset": 56,
+              "EndOffset": 90,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            },
+            {
+              "Line": 44,
+              "Offset": 126,
+              "EndOffset": 128,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 1
+            },
+            {
+              "Line": 44,
+              "Offset": 126,
+              "EndOffset": 148,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Threading.Tasks.Task Alyio.AspNetCore.ApiMessages.HttpContextExtensions::ClearCacheHeaders(System.Object)": {
+          "Lines": {
+            "55": 1,
+            "56": 1,
+            "57": 1,
+            "58": 1,
+            "59": 1,
+            "60": 1,
+            "61": 1,
+            "62": 1
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.HttpContextExtensions::.cctor()": {
+          "Lines": {
+            "15": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Messages/ApiMessage.cs": {
+      "Alyio.AspNetCore.ApiMessages.ApiMessage": {
+        "System.String Alyio.AspNetCore.ApiMessages.ApiMessage::get_Message()": {
+          "Lines": {
+            "22": 6
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.ApiMessage::set_Message(System.String)": {
+          "Lines": {
+            "24": 2,
+            "25": 2,
+            "26": 0,
+            "27": 0,
+            "29": 2,
+            "30": 2
+          },
+          "Branches": [
+            {
+              "Line": 25,
+              "Offset": 9,
+              "EndOffset": 11,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 25,
+              "Offset": 9,
+              "EndOffset": 28,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.ApiMessage::get_TraceIdentifier()": {
+          "Lines": {
+            "38": 4
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IList`1<System.String> Alyio.AspNetCore.ApiMessages.ApiMessage::get_Errors()": {
+          "Lines": {
+            "44": 5
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.ApiMessage::get_ExceptionType()": {
+          "Lines": {
+            "50": 1
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.ApiMessage::get_Detail()": {
+          "Lines": {
+            "56": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Messages/BadRequestMessage.cs": {
+      "Alyio.AspNetCore.ApiMessages.BadRequestMessage": {
+        "Alyio.AspNetCore.ApiMessages.ApiMessage Alyio.AspNetCore.ApiMessages.BadRequestMessage::get_ApiMessage()": {
+          "Lines": {
+            "66": 6
+          },
+          "Branches": []
+        },
+        "System.Int32 Alyio.AspNetCore.ApiMessages.BadRequestMessage::get_StatusCode()": {
+          "Lines": {
+            "71": 2
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.BadRequestMessage::.ctor()": {
+          "Lines": {
+            "18": 0,
+            "19": 0,
+            "20": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.BadRequestMessage::.ctor(System.String)": {
+          "Lines": {
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.BadRequestMessage::.ctor(System.String,System.String[])": {
+          "Lines": {
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.BadRequestMessage::.ctor(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)": {
+          "Lines": {
+            "41": 1,
+            "42": 1,
+            "43": 1
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.BadRequestMessage::.ctor(System.String,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)": {
+          "Lines": {
+            "48": 1,
+            "49": 1,
+            "50": 1,
+            "51": 1,
+            "52": 1,
+            "53": 1,
+            "54": 5,
+            "55": 1,
+            "56": 1,
+            "57": 5,
+            "58": 1,
+            "59": 1,
+            "60": 1,
+            "61": 1,
+            "62": 1,
+            "63": 1
+          },
+          "Branches": [
+            {
+              "Line": 51,
+              "Offset": 46,
+              "EndOffset": 48,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 51,
+              "Offset": 46,
+              "EndOffset": 64,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 67,
+              "EndOffset": 72,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 54,
+              "Offset": 221,
+              "EndOffset": 108,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1
+            },
+            {
+              "Line": 57,
+              "Offset": 196,
+              "EndOffset": 143,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            },
+            {
+              "Line": 57,
+              "Offset": 196,
+              "EndOffset": 198,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 54,
+              "Offset": 221,
+              "EndOffset": 223,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 1
+            },
+            {
+              "Line": 51,
+              "Offset": 67,
+              "EndOffset": 241,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Messages/CreatedMessage.cs": {
+      "Alyio.AspNetCore.ApiMessages.CreatedMessage": {
+        "System.String Alyio.AspNetCore.ApiMessages.CreatedMessage::get_Id()": {
+          "Lines": {
+            "15": 5
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.List`1<Alyio.AspNetCore.ApiMessages.Link> Alyio.AspNetCore.ApiMessages.CreatedMessage::get_Links()": {
+          "Lines": {
+            "21": 3
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Messages/ForbiddenMessage.cs": {
+      "Alyio.AspNetCore.ApiMessages.ForbiddenMessage": {
+        "Alyio.AspNetCore.ApiMessages.ApiMessage Alyio.AspNetCore.ApiMessages.ForbiddenMessage::get_ApiMessage()": {
+          "Lines": {
+            "26": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Alyio.AspNetCore.ApiMessages.ForbiddenMessage::get_StatusCode()": {
+          "Lines": {
+            "31": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.ForbiddenMessage::.ctor()": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.ForbiddenMessage::.ctor(System.String)": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Messages/InternalServerErrorMessage.cs": {
+      "Alyio.AspNetCore.ApiMessages.InternalServerErrorMessage": {
+        "Alyio.AspNetCore.ApiMessages.ApiMessage Alyio.AspNetCore.ApiMessages.InternalServerErrorMessage::get_ApiMessage()": {
+          "Lines": {
+            "26": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Alyio.AspNetCore.ApiMessages.InternalServerErrorMessage::get_StatusCode()": {
+          "Lines": {
+            "31": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.InternalServerErrorMessage::.ctor()": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.InternalServerErrorMessage::.ctor(System.String)": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Messages/Link.cs": {
+      "Alyio.AspNetCore.ApiMessages.Link": {
+        "System.String Alyio.AspNetCore.ApiMessages.Link::get_Href()": {
+          "Lines": {
+            "14": 3
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.Link::get_Rel()": {
+          "Lines": {
+            "20": 3
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Messages/NotFoundMessage.cs": {
+      "Alyio.AspNetCore.ApiMessages.NotFoundMessage": {
+        "Alyio.AspNetCore.ApiMessages.ApiMessage Alyio.AspNetCore.ApiMessages.NotFoundMessage::get_ApiMessage()": {
+          "Lines": {
+            "26": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Alyio.AspNetCore.ApiMessages.NotFoundMessage::get_StatusCode()": {
+          "Lines": {
+            "31": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.NotFoundMessage::.ctor()": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.NotFoundMessage::.ctor(System.String)": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Messages/UnauthorizedMessage.cs": {
+      "Alyio.AspNetCore.ApiMessages.UnauthorizedMessage": {
+        "Alyio.AspNetCore.ApiMessages.ApiMessage Alyio.AspNetCore.ApiMessages.UnauthorizedMessage::get_ApiMessage()": {
+          "Lines": {
+            "28": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Alyio.AspNetCore.ApiMessages.UnauthorizedMessage::get_StatusCode()": {
+          "Lines": {
+            "33": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.UnauthorizedMessage::.ctor()": {
+          "Lines": {
+            "15": 0,
+            "16": 0,
+            "17": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.UnauthorizedMessage::.ctor(System.String)": {
+          "Lines": {
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/XMessage.Designer.cs": {
+      "Alyio.AspNetCore.ApiMessages.XMessage": {
+        "System.Resources.ResourceManager Alyio.AspNetCore.ApiMessages.XMessage::get_ResourceManager()": {
+          "Lines": {
+            "39": 1,
+            "40": 2,
+            "41": 1,
+            "42": 1,
+            "43": 1,
+            "44": 1,
+            "45": 1
+          },
+          "Branches": [
+            {
+              "Line": 40,
+              "Offset": 11,
+              "EndOffset": 13,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 40,
+              "Offset": 11,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Globalization.CultureInfo Alyio.AspNetCore.ApiMessages.XMessage::get_Culture()": {
+          "Lines": {
+            "54": 0,
+            "55": 0,
+            "56": 0
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.XMessage::set_Culture(System.Globalization.CultureInfo)": {
+          "Lines": {
+            "57": 0,
+            "58": 0,
+            "59": 0
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.XMessage::get_Forbidden()": {
+          "Lines": {
+            "66": 0,
+            "67": 0,
+            "68": 0
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.XMessage::get_InternalServerError()": {
+          "Lines": {
+            "75": 0,
+            "76": 0,
+            "77": 0
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.XMessage::get_NotAcceptable()": {
+          "Lines": {
+            "84": 0,
+            "85": 0,
+            "86": 0
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.XMessage::get_NotFound()": {
+          "Lines": {
+            "93": 0,
+            "94": 0,
+            "95": 0
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.XMessage::get_Unauthorized()": {
+          "Lines": {
+            "102": 0,
+            "103": 0,
+            "104": 0
+          },
+          "Branches": []
+        },
+        "System.String Alyio.AspNetCore.ApiMessages.XMessage::get_ValidationFailed()": {
+          "Lines": {
+            "111": 1,
+            "112": 1,
+            "113": 1
+          },
+          "Branches": []
+        },
+        "System.Void Alyio.AspNetCore.ApiMessages.XMessage::.ctor()": {
+          "Lines": {
+            "31": 0,
+            "32": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/src/Alyio.AspNetCore.ApiMessages/Filters/ApiMessageFilterAttribute.cs": {
+      "Alyio.AspNetCore.ApiMessages.Filters.ApiMessageFilterAttribute": {
+        "System.Threading.Tasks.Task Alyio.AspNetCore.ApiMessages.Filters.ApiMessageFilterAttribute::OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "27": 0,
+            "28": 0
+          },
+          "Branches": [
+            {
+              "Line": 21,
+              "Offset": 17,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 17,
+              "EndOffset": 37,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 40,
+              "EndOffset": 42,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 40,
+              "EndOffset": 67,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "WebApiMessages.Samples.dll": {
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/test/Samples/WebApiMessages.Samples/Program.cs": {
+      "Program/<<Main>$>d__0": {
+        "System.Void Program/<<Main>$>d__0::MoveNext()": {
+          "Lines": {
+            "7": 2,
+            "10": 2,
+            "11": 2,
+            "12": 2,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 2,
+            "17": 4,
+            "20": 9,
+            "21": 2,
+            "22": 2,
+            "23": 2,
+            "24": 2,
+            "25": 2,
+            "27": 2,
+            "28": 2,
+            "29": 2,
+            "30": 2,
+            "31": 22,
+            "32": 22,
+            "33": 22,
+            "34": 22,
+            "35": 22,
+            "36": 22,
+            "37": 2,
+            "38": 2,
+            "39": 2,
+            "43": 2,
+            "46": 2,
+            "47": 2,
+            "49": 2,
+            "51": 2,
+            "52": 2,
+            "55": 2,
+            "56": 2,
+            "57": 2,
+            "58": 2,
+            "59": 2,
+            "63": 2,
+            "65": 2,
+            "67": 2
+          },
+          "Branches": [
+            {
+              "Line": 55,
+              "Offset": 815,
+              "EndOffset": 817,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 55,
+              "Offset": 815,
+              "EndOffset": 845,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/test/Samples/WebApiMessages.Samples/Models/WeatherForecast.cs": {
+      "WebApiMessages.Samples.Models.WeatherForecast": {
+        "System.Int32 WebApiMessages.Samples.Models.WeatherForecast::get_Id()": {
+          "Lines": {
+            "7": 33
+          },
+          "Branches": []
+        },
+        "System.Nullable`1<System.DateTime> WebApiMessages.Samples.Models.WeatherForecast::get_Date()": {
+          "Lines": {
+            "9": 50
+          },
+          "Branches": []
+        },
+        "System.Int32 WebApiMessages.Samples.Models.WeatherForecast::get_TemperatureC()": {
+          "Lines": {
+            "12": 78
+          },
+          "Branches": []
+        },
+        "System.Int32 WebApiMessages.Samples.Models.WeatherForecast::get_TemperatureF()": {
+          "Lines": {
+            "14": 27
+          },
+          "Branches": []
+        },
+        "System.String WebApiMessages.Samples.Models.WeatherForecast::get_Summary()": {
+          "Lines": {
+            "17": 51
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/test/Samples/WebApiMessages.Samples/Models/WeatherForecastDbContext.cs": {
+      "WebApiMessages.Samples.Models.WeatherForecastDbContext": {
+        "Microsoft.EntityFrameworkCore.DbSet`1<WebApiMessages.Samples.Models.WeatherForecast> WebApiMessages.Samples.Models.WeatherForecastDbContext::get_WeatherForecasts()": {
+          "Lines": {
+            "12": 22
+          },
+          "Branches": []
+        },
+        "System.Void WebApiMessages.Samples.Models.WeatherForecastDbContext::OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)": {
+          "Lines": {
+            "15": 2,
+            "16": 2
+          },
+          "Branches": []
+        },
+        "System.Void WebApiMessages.Samples.Models.WeatherForecastDbContext::.ctor(Microsoft.EntityFrameworkCore.DbContextOptions`1<WebApiMessages.Samples.Models.WeatherForecastDbContext>)": {
+          "Lines": {
+            "8": 7,
+            "9": 7,
+            "10": 7
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/test/Samples/WebApiMessages.Samples/Controllers/WeatherForecastApiMessageController.cs": {
+      "WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController": {
+        "System.Boolean WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController::WeatherForecastExists(System.Int32)": {
+          "Lines": {
+            "97": 0,
+            "98": 0,
+            "99": 0
+          },
+          "Branches": [
+            {
+              "Line": 98,
+              "Offset": 26,
+              "EndOffset": 28,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 98,
+              "Offset": 26,
+              "EndOffset": 40,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController::.ctor(WebApiMessages.Samples.Models.WeatherForecastDbContext,Microsoft.Extensions.Logging.ILogger`1<WebApiMessages.Samples.Controllers.WeatherForecastController>)": {
+          "Lines": {
+            "15": 10
+          },
+          "Branches": []
+        }
+      },
+      "WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController/<DeleteWeatherForecastAsync>d__7": {
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController/<DeleteWeatherForecastAsync>d__7::MoveNext()": {
+          "Lines": {
+            "84": 0,
+            "85": 0,
+            "87": 0,
+            "89": 0,
+            "91": 0,
+            "93": 0,
+            "94": 0
+          },
+          "Branches": [
+            {
+              "Line": 85,
+              "Offset": 45,
+              "EndOffset": 47,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 85,
+              "Offset": 45,
+              "EndOffset": 53,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 89,
+              "Offset": 217,
+              "EndOffset": 219,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 89,
+              "Offset": 217,
+              "EndOffset": 225,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController/<GetAllWeatherForecastAsync>d__3": {
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController/<GetAllWeatherForecastAsync>d__3::MoveNext()": {
+          "Lines": {
+            "19": 1,
+            "20": 1,
+            "22": 1,
+            "23": 1
+          },
+          "Branches": [
+            {
+              "Line": 20,
+              "Offset": 31,
+              "EndOffset": 33,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 20,
+              "Offset": 31,
+              "EndOffset": 39,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      },
+      "WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController/<GetWeatherForecastAsync>d__4": {
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController/<GetWeatherForecastAsync>d__4::MoveNext()": {
+          "Lines": {
+            "28": 2,
+            "29": 2,
+            "31": 2,
+            "33": 2,
+            "35": 2,
+            "36": 2
+          },
+          "Branches": [
+            {
+              "Line": 29,
+              "Offset": 31,
+              "EndOffset": 33,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 31,
+              "EndOffset": 39,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 33,
+              "Offset": 204,
+              "EndOffset": 206,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 33,
+              "Offset": 204,
+              "EndOffset": 212,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            }
+          ]
+        }
+      },
+      "WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController/<PostWeatherForecastAsync>d__5": {
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController/<PostWeatherForecastAsync>d__5::MoveNext()": {
+          "Lines": {
+            "40": 2,
+            "41": 2,
+            "42": 1,
+            "43": 1,
+            "46": 1,
+            "48": 1,
+            "49": 1,
+            "51": 1,
+            "52": 1
+          },
+          "Branches": [
+            {
+              "Line": 41,
+              "Offset": 50,
+              "EndOffset": 52,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 41,
+              "Offset": 50,
+              "EndOffset": 70,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 46,
+              "Offset": 86,
+              "EndOffset": 88,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 86,
+              "EndOffset": 99,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            }
+          ]
+        }
+      },
+      "WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController/<PutWeatherForecastAsync>d__6": {
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController/<PutWeatherForecastAsync>d__6::MoveNext()": {
+          "Lines": {
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "67": 0,
+            "69": 0,
+            "72": 0,
+            "73": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "79": 0
+          },
+          "Branches": [
+            {
+              "Line": 57,
+              "Offset": 39,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 57,
+              "Offset": 39,
+              "EndOffset": 48,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 62,
+              "Offset": 69,
+              "EndOffset": 71,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 62,
+              "Offset": 69,
+              "EndOffset": 89,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 67,
+              "Offset": 105,
+              "EndOffset": 107,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 67,
+              "Offset": 105,
+              "EndOffset": 113,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/Users/xq/github.com/qqbuby/Alyio.AspNetCore.ApiMessages/test/Samples/WebApiMessages.Samples/Controllers/WeatherForecastController.cs": {
+      "WebApiMessages.Samples.Controllers.WeatherForecastController": {
+        "System.Boolean WebApiMessages.Samples.Controllers.WeatherForecastController::WeatherForecastExists(System.Int32)": {
+          "Lines": {
+            "109": 0,
+            "110": 0,
+            "111": 0
+          },
+          "Branches": [
+            {
+              "Line": 110,
+              "Offset": 26,
+              "EndOffset": 28,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 110,
+              "Offset": 26,
+              "EndOffset": 40,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastController::.ctor(WebApiMessages.Samples.Models.WeatherForecastDbContext,Microsoft.Extensions.Logging.ILogger`1<WebApiMessages.Samples.Controllers.WeatherForecastController>)": {
+          "Lines": {
+            "14": 0
+          },
+          "Branches": []
+        }
+      },
+      "WebApiMessages.Samples.Controllers.WeatherForecastController/<DeleteWeatherForecastAsync>d__7": {
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastController/<DeleteWeatherForecastAsync>d__7::MoveNext()": {
+          "Lines": {
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "95": 0,
+            "96": 0,
+            "97": 0,
+            "98": 0,
+            "101": 0,
+            "103": 0,
+            "105": 0,
+            "106": 0
+          },
+          "Branches": [
+            {
+              "Line": 90,
+              "Offset": 50,
+              "EndOffset": 52,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 90,
+              "Offset": 50,
+              "EndOffset": 70,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 96,
+              "Offset": 243,
+              "EndOffset": 245,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 96,
+              "Offset": 243,
+              "EndOffset": 263,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "WebApiMessages.Samples.Controllers.WeatherForecastController/<GetAllWeatherForecastAsync>d__3": {
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastController/<GetAllWeatherForecastAsync>d__3::MoveNext()": {
+          "Lines": {
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "24": 0,
+            "25": 0
+          },
+          "Branches": [
+            {
+              "Line": 19,
+              "Offset": 39,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 39,
+              "EndOffset": 64,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "WebApiMessages.Samples.Controllers.WeatherForecastController/<GetWeatherForecastAsync>d__4": {
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastController/<GetWeatherForecastAsync>d__4::MoveNext()": {
+          "Lines": {
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "42": 0,
+            "43": 0
+          },
+          "Branches": [
+            {
+              "Line": 31,
+              "Offset": 39,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 31,
+              "Offset": 39,
+              "EndOffset": 64,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 37,
+              "Offset": 237,
+              "EndOffset": 239,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 37,
+              "Offset": 237,
+              "EndOffset": 259,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "WebApiMessages.Samples.Controllers.WeatherForecastController/<PostWeatherForecastAsync>d__5": {
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastController/<PostWeatherForecastAsync>d__5::MoveNext()": {
+          "Lines": {
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "53": 0,
+            "54": 0,
+            "56": 0,
+            "57": 0
+          },
+          "Branches": [
+            {
+              "Line": 48,
+              "Offset": 50,
+              "EndOffset": 52,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 50,
+              "EndOffset": 87,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "WebApiMessages.Samples.Controllers.WeatherForecastController/<PutWeatherForecastAsync>d__6": {
+        "System.Void WebApiMessages.Samples.Controllers.WeatherForecastController/<PutWeatherForecastAsync>d__6::MoveNext()": {
+          "Lines": {
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "67": 0,
+            "68": 0,
+            "69": 0,
+            "72": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "83": 0,
+            "84": 0
+          },
+          "Branches": [
+            {
+              "Line": 62,
+              "Offset": 39,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 62,
+              "Offset": 39,
+              "EndOffset": 59,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 67,
+              "Offset": 80,
+              "EndOffset": 82,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 67,
+              "Offset": 80,
+              "EndOffset": 100,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}
