@@ -20,7 +20,7 @@ sealed class ApiMessageHandlerMiddleware
     }
 
     /// <summary>
-    /// Processes unhandled exception and write <see cref="ApiMessage"/> to the current <see cref="HttpContext.Response"/>.
+    /// Processes unhandled exception and write <see cref="ProblemDetails"/> to the current <see cref="HttpContext.Response"/>.
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
@@ -41,7 +41,7 @@ sealed class ApiMessageHandlerMiddleware
                     throw;
                 }
 
-                await context.WriteApiMessageAsync(message);
+                await context.WriteProblemDetailsAsync(message);
                 return;
             }
             throw; // Re-throw the original if we couldn't handle it

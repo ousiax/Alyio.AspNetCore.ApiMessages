@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace Alyio.AspNetCore.ApiMessages.Filters;
 
 /// <summary>
-/// Represents an exception filter to handler <see cref="IApiMessage"/> message and writes <see cref="IApiMessage.ApiMessage"/> to the current http response.
+/// Represents an exception filter to handler <see cref="IApiMessage"/> message and writes <see cref="IApiMessage.ProblemDetails"/> to the current http response.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 public class ApiMessageFilterAttribute : ExceptionFilterAttribute
@@ -21,7 +21,7 @@ public class ApiMessageFilterAttribute : ExceptionFilterAttribute
         if (!context.HttpContext.Response.HasStarted && context.Exception is IApiMessage message)
         {
             context.ExceptionHandled = true;
-            return context.HttpContext.WriteApiMessageAsync(message);
+            return context.HttpContext.WriteProblemDetailsAsync(message);
         }
 
         return Task.CompletedTask;

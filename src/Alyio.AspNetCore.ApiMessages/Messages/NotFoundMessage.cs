@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -19,14 +20,14 @@ public class NotFoundMessage : Exception, IApiMessage
     /// </summary>
     public NotFoundMessage(string message) : base(message)
     {
-        this.ApiMessage = new ApiMessage { Message = message };
+        this.ProblemDetails = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.NotFound,
+            Title = message,
+            Type = "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+        };
     }
 
     /// <inheritdoc />
-    public ApiMessage ApiMessage { get; }
-
-    /// <summary>
-    /// 404
-    /// </summary>
-    public int StatusCode { get; } = 404;
+    public ProblemDetails ProblemDetails { get; }
 }

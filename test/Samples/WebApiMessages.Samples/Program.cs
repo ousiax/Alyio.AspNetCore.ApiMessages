@@ -12,7 +12,7 @@ builder.Services.Configure<ApiBehaviorOptions>(opt =>
     opt.InvalidModelStateResponseFactory = ctx =>
     {
         ctx.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-        return new JsonResult(new BadRequestMessage(ctx.ModelState).ApiMessage);
+        return new JsonResult(new BadRequestMessage(ctx.ModelState).ProblemDetails);
     };
 });
 

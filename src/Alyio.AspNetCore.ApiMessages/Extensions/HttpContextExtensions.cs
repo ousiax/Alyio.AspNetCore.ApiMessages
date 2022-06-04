@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -12,17 +14,17 @@ namespace Alyio.AspNetCore.ApiMessages;
 /// </summary>
 public static class HttpContextExtensions
 {
-    private readonly static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+    private readonly static JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
 
     /// <summary>
-    /// Write the API message into <see cref="HttpContext"/>.
+    /// Writes machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807.
     /// </summary>
     /// <param name="context">The <see cref="HttpContext"/></param>
     /// <param name="message">The <see cref="IApiMessage"/></param>
     /// <param name="clearCacheHeaders">Clear Cache-Control, Pragma, Expires and ETag headers. Default is true.</param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    public static Task WriteApiMessageAsync(this HttpContext context, IApiMessage message, bool clearCacheHeaders = true)
+    public static Task WriteProblemDetailsAsync(this HttpContext context, IApiMessage message, bool clearCacheHeaders = true)
     {
         if (context == null)
         {
@@ -40,14 +42,12 @@ public static class HttpContextExtensions
             context.Response.OnStarting(ClearCacheHeaders, context.Response);
         }
 
-        context.Response.StatusCode = message.StatusCode;
-        if (message.ApiMessage.TraceIdentifier == null)
-        {
-            message.ApiMessage.TraceIdentifier = context.TraceIdentifier;
-        }
-
-        string errorText = JsonSerializer.Serialize(message.ApiMessage, _serializerOptions);
-        context.Response.Headers[HeaderNames.ContentType] = "application/json;charset=utf-8";
+        context.Response.StatusCode = message.ProblemDetails.Status.GetValueOrDefault((int)HttpStatusCode.InternalServerError);
+        message.ProblemDetails.Extensions["traceId"] = Activity.Current?.TraceId.ToString() ?? context.TraceIdentifier;
+        string errorText = JsonSerializer.Serialize(message.ProblemDetails, SourceGenerationContext.Default.ProblemDetails);
+        // https://datatracker.ietf.org/doc/html/rfc7807#section-3
+        // When serialized as a JSON document, that format is identified with the "application/problem+json" media type.
+        context.Response.Headers[HeaderNames.ContentType] = "application/problem+json; charset=utf-8";
         return context.Response.WriteAsync(errorText);
     }
 

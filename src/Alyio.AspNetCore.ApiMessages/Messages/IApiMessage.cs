@@ -6,13 +6,7 @@
 public interface IApiMessage
 {
     /// <summary>
-    /// Gets the  status code defined for HTTP.
+    /// Gets the <see cref="ProblemDetails"/>.
     /// </summary>
-    int StatusCode { get; }
-
-    /// <summary>
-    /// Gets the <see cref="ApiMessage"/>.
-    /// </summary>
-    ApiMessage ApiMessage { get; }
+    ProblemDetails ProblemDetails { get; }
 }
-

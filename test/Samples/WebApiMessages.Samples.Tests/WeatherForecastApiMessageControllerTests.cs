@@ -13,6 +13,21 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
     public WeatherForecastApiMessageControllerTests(WebApplicationFactory<Program> factory) => _factory = factory;
 
     [Fact]
+    public async Task Test_Endpoints_NotFound_GetWeatherForecastAsync()
+    {
+        var requestUri = "WeatherForecastApiMessage/1989";
+        var client = _factory.CreateClient();
+
+        var response = await client.GetAsync(requestUri);
+
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+        var message = await response.Content.ReadFromJsonAsync<ProblemDetails>();
+
+        Assert.Equal("Not Found", message!.Title);
+    }
+
+    [Fact]
     public async Task Test_Endpoints_ValidationFailed_PostWeatherForecastAsync()
     {
         var requestUri = "WeatherForecastApiMessage";
@@ -22,9 +37,9 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 
-        var message = await response.Content.ReadFromJsonAsync<ApiMessage>();
+        var message = await response.Content.ReadFromJsonAsync<ProblemDetails>();
 
-        Assert.Equal("ValidationFailed", message!.Message);
+        Assert.Equal("ValidationFailed", message!.Title);
     }
 
     [Fact]

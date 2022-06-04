@@ -2,7 +2,7 @@
 
 ![Build Status](https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages/actions/workflows/ci.yml/badge.svg?branch=main)
 
-The *Alyio.AspNetCore.ApiMessages* provides the mechanism to process unhandled exception occured during a HTTP context.
+The *Alyio.AspNetCore.ApiMessages* provides the mechanism to process unhandled exception occured during a HTTP context and writes machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807..
 
 You can throw any exception during a HTTP context if you want, and if the `IApiMessage` has been implemented by the exception, `Alyio.AspNetCore.ApiMessages` will produce a response corresponding to it.
 
@@ -78,66 +78,6 @@ app.MapControllers();
 app.Run();
 ```
 
-
-For the following example, in a controller action.
-
-```cs
-[HttpPut("{keys}")]
-public async Task<bool> UpdateKeyAsync([FromRoute] string apiKey)
-{
-    var loginName = this.HttpContext.User.Identity.Name;
-        if (loginName != null)
-    {
-            var result = await _keys.UpdateAsync(loginName, apiKey);
-            return result;
-    }
-    throw new InternalServerErrorMessage("Couldn't get identity name from the current http context.");
-}
-```
-
-The the `InternalServerErrorMessage` has been throwed, `Alyio.AspNetCore.ApiMessages` will produce a response as follow.
-
-```txt
-HTTP/1.1 500 Internal Server Error
-Date: Fri, 05 May 2017 02:12:53 GMT
-Content-Type: application/json;charset=utf-8
-Server: Kestrel
-Content-Length: 106
-
-{"message":"Couldn't get identity name from the current http context.","trace_identifier":"0HL4JBDTTIC9R"}
-```
-
-For another example, it throws a `UnauthorizedMessage`.
-
-```cs
-[HttpHead]
-public async Task<string> AuthAsync(Request req)
-{
-    if (!ModelState.IsValid)
-    {
-        throw new BadRequestMessage(XMessage.ValidationFailed, ModelState);
-    }
-    var isValid = await _authenticationService.AuthAsync(req);
-    if (isValid)
-    {
-        return await _identityNameReadService.ReadAsync(req.Key);
-    }
-    else
-    {
-        throw new UnauthorizedMessage();
-    }
-}
-```
-
-And `Alyio.AspNetCore.ApiMessages` will produce this response.
-
-```txt
-HTTP/1.1 401 Unauthorized
-Date: Fri, 05 May 2017 02:07:29 GMT
-Content-Type: application/json;charset=utf-8
-Server: Kestrel
-```
-
 You can also run the sample at `test/Samples/WebApiMessages.Samples/`:
 
 ```console
@@ -179,42 +119,45 @@ http://localhost:5000/> cd WeatherForecastApiMessage
 http://localhost:5000/WeatherForecastApiMessage> get 20
 HTTP/1.1 404 Not Found
 Cache-Control: no-cache
-Content-Type: application/json; charset=utf-8
-Date: Fri, 03 Jun 2022 12:29:30 GMT
+Content-Type: application/problem+json; charset=utf-8
+Date: Sat, 04 Jun 2022 12:28:35 GMT
 Expires: -1
 Pragma: no-cache
 Server: Kestrel
 Transfer-Encoding: chunked
 
 {
-  "message": "Not Found",
-  "trace_identifier": "0HMI5BIMFN3GJ:00000006"
+  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+  "title": "Not Found",
+  "status": 404,
+  "traceId": "050b5d961d004c79240a3c409fdf24d2"
 }
 
 
 http://localhost:5000/WeatherForecastApiMessage> post -c "{}"
 HTTP/1.1 400 Bad Request
 Cache-Control: no-cache
-Content-Type: application/json; charset=utf-8
-Date: Fri, 03 Jun 2022 12:29:38 GMT
+Content-Type: application/problem+json; charset=utf-8
+Date: Sat, 04 Jun 2022 12:28:44 GMT
 Expires: -1
 Pragma: no-cache
 Server: Kestrel
 Transfer-Encoding: chunked
 
 {
-  "message": "ValidationFailed",
-  "trace_identifier": "0HMI5BIMFN3GJ:00000008",
+  "title": "ValidationFailed",
+  "status": 400,
   "errors": [
     "Summary: The Summary field is required."
-  ]
+  ],
+  "traceId": "ca3d770cf8c6d555590b6d8ab92ed594"
 }
 
 
 http://localhost:5000/WeatherForecastApiMessage> post -c "{"summary": "hot"}"
 HTTP/1.1 201 Created
 Content-Type: application/json; charset=utf-8
-Date: Fri, 03 Jun 2022 12:29:49 GMT
+Date: Sat, 04 Jun 2022 12:28:53 GMT
 Location: /WeatherForecastApiMessage/11
 Server: Kestrel
 Transfer-Encoding: chunked
@@ -230,83 +173,39 @@ Transfer-Encoding: chunked
 }
 
 
-http://localhost:5000/WeatherForecastApiMessage> post -c "{"summary": "hot", "temperaturec": 64}"
-HTTP/1.1 400 Bad Request
-Cache-Control: no-cache
-Content-Type: application/json; charset=utf-8
-Date: Fri, 03 Jun 2022 12:30:07 GMT
-Expires: -1
-Pragma: no-cache
-Server: Kestrel
-Transfer-Encoding: chunked
-
-{
-  "message": "ValidationFailed",
-  "trace_identifier": "0HMI5BIMFN3GJ:0000000C",
-  "errors": [
-    "TemperatureC: The field TemperatureC must be between -20 and 55."
-  ]
-}
-
-
-http://localhost:5000/WeatherForecastApiMessage> post -c "{"summary": "hot", "temperaturec": 34}"
-HTTP/1.1 201 Created
-Content-Type: application/json; charset=utf-8
-Date: Fri, 03 Jun 2022 12:30:12 GMT
-Location: /WeatherForecastApiMessage/12
-Server: Kestrel
-Transfer-Encoding: chunked
-
-{
-  "id": "12",
-  "links": [
-    {
-      "href": "/WeatherForecastApiMessage/12",
-      "rel": "self"
-    }
-  ]
-}
-
-
-http://localhost:5000/WeatherForecastApiMessage> get 12
+http://localhost:5000/WeatherForecastApiMessage> get 11
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
-Date: Fri, 03 Jun 2022 12:30:15 GMT
+Date: Sat, 04 Jun 2022 12:29:24 GMT
 Server: Kestrel
 Transfer-Encoding: chunked
 
 {
-  "id": 12,
+  "id": 11,
   "date": null,
-  "temperatureC": 34,
-  "temperatureF": 93,
+  "temperatureC": 0,
+  "temperatureF": 32,
   "summary": "hot"
 }
 
 
-http://localhost:5000/WeatherForecastApiMessage> delete 13
+http://localhost:5000/WeatherForecastApiMessage> delete 12
 HTTP/1.1 404 Not Found
 Cache-Control: no-cache
-Content-Type: application/json; charset=utf-8
-Date: Fri, 03 Jun 2022 12:30:23 GMT
+Content-Type: application/problem+json; charset=utf-8
+Date: Sat, 04 Jun 2022 12:29:48 GMT
 Expires: -1
 Pragma: no-cache
 Server: Kestrel
 Transfer-Encoding: chunked
 
 {
-  "message": "Not Found",
-  "trace_identifier": "0HMI5BIMFN3GJ:00000012"
+  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+  "title": "Not Found",
+  "status": 404,
+  "traceId": "5f2f4caf15bb46c35e77b5eb8a6a532f"
 }
 
 
-http://localhost:5000/WeatherForecastApiMessage> delete 12
-HTTP/1.1 200 OK
-Content-Length: 0
-Date: Fri, 03 Jun 2022 12:30:28 GMT
-Server: Kestrel
-
-
-
-
+http://localhost:5000/WeatherForecastApiMessage> exit
 ```

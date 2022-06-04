@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -19,14 +20,14 @@ public sealed class ForbiddenMessage : Exception, IApiMessage
     /// </summary>
     public ForbiddenMessage(string message) : base(message)
     {
-        this.ApiMessage = new ApiMessage { Message = message };
+        this.ProblemDetails = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.Forbidden,
+            Title = message,
+            Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.3",
+        };
     }
 
     /// <inheritdoc />
-    public ApiMessage ApiMessage { get; }
-
-    /// <summary>
-    /// 403
-    /// </summary>
-    public int StatusCode { get; } = 403;
+    public ProblemDetails ProblemDetails { get; }
 }

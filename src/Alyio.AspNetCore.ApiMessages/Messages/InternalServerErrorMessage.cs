@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -19,14 +20,14 @@ public class InternalServerErrorMessage : Exception, IApiMessage
     /// </summary>
     public InternalServerErrorMessage(string message) : base(message)
     {
-        this.ApiMessage = new ApiMessage { Message = message };
+        this.ProblemDetails = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.InternalServerError,
+            Title = message,
+            Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1",
+        };
     }
 
     /// <inheritdoc />
-    public ApiMessage ApiMessage { get; }
-
-    /// <summary>
-    /// 500
-    /// </summary>
-    public int StatusCode { get; } = 500;
+    public ProblemDetails ProblemDetails { get; }
 }

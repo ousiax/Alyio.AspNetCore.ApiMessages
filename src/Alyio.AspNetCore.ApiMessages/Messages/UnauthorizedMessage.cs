@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -21,15 +22,15 @@ public sealed class UnauthorizedMessage : Exception, IApiMessage
     /// </summary>
     public UnauthorizedMessage(string message) : base(message)
     {
-        this.ApiMessage = new ApiMessage { Message = message };
+        this.ProblemDetails = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.Unauthorized,
+            Title = message,
+            Type = "https://datatracker.ietf.org/doc/html/rfc7235#section-3.1",
+        };
     }
 
     /// <inheritdoc />
-    public ApiMessage ApiMessage { get; }
-
-    /// <summary>
-    /// 401
-    /// </summary>
-    public int StatusCode { get; } = 401;
+    public ProblemDetails ProblemDetails { get; }
 }
 

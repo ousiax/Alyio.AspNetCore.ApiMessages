@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Diagnostics;
@@ -27,8 +28,8 @@ public static class ExceptionHandler
         var error = context.Features.Get<IExceptionHandlerFeature>()!.Error;
 
         var message = new InternalServerErrorMessage(error.Message);
-        message.ApiMessage.ExceptionType = error.GetType().Name;
-        message.ApiMessage.TraceIdentifier = context.TraceIdentifier;
+        message.ProblemDetails.Extensions["exceptionType"] = error.GetType().Name;
+        message.ProblemDetails.Extensions["traceId"] = Activity.Current?.TraceId.ToString() ?? context.TraceIdentifier;
 
         var errors = new List<string>();
         if (error is AggregateException aggregateException)
@@ -38,14 +39,14 @@ public static class ExceptionHandler
                 errors.Add(e.Message);
                 return true;
             });
-            message.ApiMessage.Errors = errors.Distinct().ToList();
+            message.ProblemDetails.Extensions["errors"] = errors.Distinct().ToList();
         }
 
         if (context.RequestServices.GetService<IHostingEnvironment>().IsDevelopment())
         {
-            message.ApiMessage.Detail = error.ToString();
+            message.ProblemDetails.Detail = error.ToString();
         }
 
-        return context.WriteApiMessageAsync(message);
+        return context.WriteProblemDetailsAsync(message);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Alyio.AspNetCore.ApiMessages;
@@ -24,15 +25,19 @@ public sealed class BadRequestMessage : Exception, IApiMessage
     /// </summary>
     public BadRequestMessage(string message) : base(message)
     {
-        this.ApiMessage = new ApiMessage { Message = message };
+        this.ProblemDetails = new ProblemDetails
+        {
+            Title = message,
+            Status = (int)HttpStatusCode.BadRequest,
+        };
     }
 
     /// <summary>
     /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
     /// </summary>
-    public BadRequestMessage(string message, params string[] errors) : base(message)
+    public BadRequestMessage(string message, params string[] errors) : this(message)
     {
-        this.ApiMessage = new ApiMessage { Message = message, Errors = errors };
+        this.ProblemDetails.Extensions["errors"] = errors;
     }
 
     /// <summary>
@@ -45,28 +50,23 @@ public sealed class BadRequestMessage : Exception, IApiMessage
     /// <summary>
     /// Initialize a new instance of <see cref="BadRequestMessage"/> class.
     /// </summary>
-    public BadRequestMessage(string message, ModelStateDictionary modelState) : base(message)
+    public BadRequestMessage(string message, ModelStateDictionary modelState) : this(message)
     {
-        this.ApiMessage = new ApiMessage { Message = message };
-        if (modelState.ErrorCount > 0 && this.ApiMessage.Errors == null)
+        if (modelState.ErrorCount > 0)
         {
-            this.ApiMessage.Errors = new List<string>();
+            var errors = new List<string>();
             foreach (var key in modelState.Keys)
             {
                 var stateEntry = modelState[key];
                 foreach (var error in stateEntry!.Errors)
                 {
-                    this.ApiMessage.Errors.Add($"{key}: {error.ErrorMessage}");
+                    errors.Add($"{key}: {error.ErrorMessage}");
                 }
             }
+            this.ProblemDetails.Extensions["errors"] = errors;
         }
     }
 
     /// <inheritdoc />
-    public ApiMessage ApiMessage { get; }
-
-    /// <summary>
-    /// 400
-    /// </summary>
-    public int StatusCode { get; } = 400;
+    public ProblemDetails ProblemDetails { get; }
 }
