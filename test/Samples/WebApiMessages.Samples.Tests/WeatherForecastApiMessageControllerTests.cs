@@ -70,4 +70,19 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
 
         Assert.Equal(createdMessage.Id, weather2!.Id.ToString());
     }
+
+    [Fact]
+    public async Task Test_Endpoints_InternalServerError_Oops()
+    {
+        var requestUri = "WeatherForecastApiMessage/1989";
+        var client = _factory.CreateClient();
+
+        var response = await client.GetAsync(requestUri);
+
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+        var message = await response.Content.ReadFromJsonAsync<ProblemDetails>();
+
+        Assert.Equal("Not Found", message!.Title);
+    }
 }
