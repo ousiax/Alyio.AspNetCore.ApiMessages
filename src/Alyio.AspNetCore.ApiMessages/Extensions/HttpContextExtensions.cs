@@ -43,7 +43,7 @@ public static class HttpContextExtensions
         }
 
         context.Response.StatusCode = message.ProblemDetails.Status.GetValueOrDefault((int)HttpStatusCode.InternalServerError);
-        message.ProblemDetails.Extensions["traceId"] = Activity.Current?.TraceId.ToString() ?? context.TraceIdentifier;
+        message.ProblemDetails.Extensions["traceId"] = Activity.Current?.Id ?? context.TraceIdentifier;
         string errorText = JsonSerializer.Serialize(message.ProblemDetails, SourceGenerationContext.Default.ProblemDetails);
         // https://datatracker.ietf.org/doc/html/rfc7807#section-3
         // When serialized as a JSON document, that format is identified with the "application/problem+json" media type.

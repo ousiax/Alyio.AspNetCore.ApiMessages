@@ -78,7 +78,6 @@ public class WeatherForecastApiMessageController : ControllerBase
         }
     }
 
-
     [HttpDelete("{id}")]
     public async Task DeleteWeatherForecastAsync([FromRoute] int id)
     {

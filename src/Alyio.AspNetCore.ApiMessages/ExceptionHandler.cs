@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Diagnostics;
@@ -29,7 +28,6 @@ public static class ExceptionHandler
 
         var message = new InternalServerErrorMessage(error.Message);
         message.ProblemDetails.Extensions["exceptionType"] = error.GetType().Name;
-        message.ProblemDetails.Extensions["traceId"] = Activity.Current?.TraceId.ToString() ?? context.TraceIdentifier;
 
         var errors = new List<string>();
         if (error is AggregateException aggregateException)
