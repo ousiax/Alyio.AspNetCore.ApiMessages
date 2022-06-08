@@ -27,7 +27,7 @@ public static class ExceptionHandler
         var error = context.Features.Get<IExceptionHandlerFeature>()!.Error;
 
         var message = new InternalServerErrorMessage(error.Message);
-        message.ProblemDetails.Extensions["exceptionType"] = error.GetType().Name;
+        message.ProblemDetails.Extensions["exceptionType"] = error.GetType().FullName;
 
         var errors = new List<string>();
         if (error is AggregateException aggregateException)
@@ -43,6 +43,10 @@ public static class ExceptionHandler
         if (context.RequestServices.GetService<IHostingEnvironment>().IsDevelopment())
         {
             message.ProblemDetails.Detail = error.ToString();
+        }
+        else
+        {
+            message.ProblemDetails.Detail = error.Message;
         }
 
         return context.WriteProblemDetailsAsync(message);
