@@ -6,6 +6,10 @@ The *Alyio.AspNetCore.ApiMessages* provides the mechanism to process unhandled e
 
 You can throw any exception during a HTTP context if you want, and if the `IApiMessage` has been implemented by the exception, `Alyio.AspNetCore.ApiMessages` will produce a response corresponding to it.
 
+```console
+dotnet add package Alyio.AspNetCore.ApiMessages --version 7.0.3
+```
+
 To use `Alyio.AspNetCore.ApiMessage`, just call `app.UseApiMessageHandler` in `Startup.Configure` as below.
 
 ```cs
