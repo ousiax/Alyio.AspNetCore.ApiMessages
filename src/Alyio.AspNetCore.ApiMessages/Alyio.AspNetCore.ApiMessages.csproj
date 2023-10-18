@@ -15,10 +15,10 @@
     <PackageTags>AspNetCore;Api;Messages</PackageTags>
     <PackageReleaseNotes>Refactor to write machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageProjectUrl>https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/ousiax/Alyio.AspNetCore.ApiMessages</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages</RepositoryUrl>
+    <RepositoryUrl>https://github.com/ousiax/Alyio.AspNetCore.ApiMessages</RepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 

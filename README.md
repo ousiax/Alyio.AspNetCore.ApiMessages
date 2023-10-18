@@ -1,6 +1,6 @@
 # Alyio.AspNetCore.ApiMessages
 
-![Build Status](https://github.com/qqbuby/Alyio.AspNetCore.ApiMessages/actions/workflows/ci.yml/badge.svg?branch=main)
+![Build Status](https://github.com/ousiax/Alyio.AspNetCore.ApiMessages/actions/workflows/ci.yml/badge.svg?branch=main)
 
 The **Alyio.AspNetCore.ApiMessages** provides the mechanism to process unhandled exception occured during a HTTP context and writes machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807..
 
