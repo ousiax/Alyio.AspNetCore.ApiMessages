@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Copyright>Copyright (c) 2016 ROY</Copyright>
+    <Copyright>Copyright (c) 2023 Jon.X</Copyright>
     <AssemblyTitle>Alyio.AspNetCore.ApiMessages</AssemblyTitle>
     <VersionPrefix>7.0.3</VersionPrefix>
-    <Authors>ROY</Authors>
+    <Authors>Jon.X</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <LangVersion>10.0</LangVersion>
