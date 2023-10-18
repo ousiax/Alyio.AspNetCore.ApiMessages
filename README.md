@@ -32,8 +32,18 @@ builder.Services.Configure<ApiBehaviorOptions>(opt =>
 
 var app = builder.Build();
 
-app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync });
-app.UseApiMessageHandler();
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseDeveloperExceptionPage();
+//}
+//else
+//{
+app.UseApiMessageHandler().UseExceptionHandler(
+new ExceptionHandlerOptions
+{
+    ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync
+});
+//}
 
 // . . .
 
