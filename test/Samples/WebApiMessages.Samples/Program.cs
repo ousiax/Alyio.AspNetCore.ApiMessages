@@ -1,7 +1,7 @@
-using System.Net;
 using Alyio.AspNetCore.ApiMessages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using WebApiMessages.Samples.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -48,8 +48,18 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync });
-app.UseApiMessageHandler();
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseDeveloperExceptionPage();
+//}
+//else
+//{
+app.UseApiMessageHandler().UseExceptionHandler(
+new ExceptionHandlerOptions
+{
+    ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync
+});
+//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
