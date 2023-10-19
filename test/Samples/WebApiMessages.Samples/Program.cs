@@ -54,11 +54,8 @@ var app = builder.Build();
 //}
 //else
 //{
-app.UseApiMessageHandler().UseExceptionHandler(
-new ExceptionHandlerOptions
-{
-    ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync
-});
+app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync });
+app.UseApiMessageHandler();
 //}
 
 // Configure the HTTP request pipeline.
