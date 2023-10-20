@@ -2,9 +2,29 @@
 
 ![Build Status](https://github.com/ousiax/Alyio.AspNetCore.ApiMessages/actions/workflows/ci.yml/badge.svg?branch=main)
 
-The **Alyio.AspNetCore.ApiMessages** provides the mechanism to process unhandled exception occured during a HTTP context and writes machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807..
+The **Alyio.AspNetCore.ApiMessages** provides the mechanism to process unhandled exception occured during a HTTP context and writes machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807.
 
 You can throw any exception during a HTTP context if you want, and if the `IApiMessage` has been implemented by the exception, `Alyio.AspNetCore.ApiMessages` will produce a consistent response corresponding to it.
+
+For `201 Created` message, 
+
+```cs
+[HttpPost]
+public async Task<CreatedMessage> PostWeatherForecastAsync([FromBody] WeatherForecast weather)
+{
+    if (!ModelState.IsValid)
+    {
+        throw new BadRequestMessage(ModelState);
+    }
+
+    _ = _context.WeatherForecasts ?? throw new InternalServerErrorMessage("Entity set 'WeatherForecastDbContext.WeatherForecasts'  is null.");
+
+    await _context.WeatherForecasts.AddAsync(weather);
+    await _context.SaveChangesAsync();
+
+    return this.CreatedMessageAtAction(nameof(GetWeatherForecastAsync), new { id = weather.Id }, weather.Id.ToString())!;
+}
+```
 
 ```console
 dotnet add package Alyio.AspNetCore.ApiMessages --version 7.0.3
@@ -74,18 +94,19 @@ Using OpenAPI description at http://localhost:5000/swagger/v1/swagger.json
 For detailed tool info, see https://aka.ms/http-repl-doc
 
 http://localhost:5000/> ls
-.                           []
-WeatherForecast             [GET|POST]
-WeatherForecastApiMessage   [GET|POST]
+.                              []
+oops                           [GET]
+weather-forecast               [GET|POST]
+weather-forecast-api-message   [GET|POST]
 
-http://localhost:5000/> cd WeatherForecastApiMessage
-/WeatherForecastApiMessage    [GET|POST]
+http://localhost:5000/> cd weather-forecast-api-message
+/weather-forecast-api-message    [GET|POST]
 
-http://localhost:5000/WeatherForecastApiMessage> get 20
+http://localhost:5000/weather-forecast-api-message> get 20
 HTTP/1.1 404 Not Found
 Cache-Control: no-cache
 Content-Type: application/problem+json; charset=utf-8
-Date: Sat, 04 Jun 2022 12:28:35 GMT
+Date: Fri, 20 Oct 2023 08:32:54 GMT
 Expires: -1
 Pragma: no-cache
 Server: Kestrel
@@ -95,35 +116,35 @@ Transfer-Encoding: chunked
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
   "title": "Not Found",
   "status": 404,
-  "traceId": "050b5d961d004c79240a3c409fdf24d2"
+  "traceId": "00-2f8215f70a0e65011f461b61e333eab6-756e7aa8687a62ed-00"
 }
 
 
-http://localhost:5000/WeatherForecastApiMessage> post -c "{}"
+http://localhost:5000/weather-forecast-api-message> post -c "{}"
 HTTP/1.1 400 Bad Request
-Cache-Control: no-cache
 Content-Type: application/problem+json; charset=utf-8
-Date: Sat, 04 Jun 2022 12:28:44 GMT
-Expires: -1
-Pragma: no-cache
+Date: Fri, 20 Oct 2023 08:38:04 GMT
 Server: Kestrel
 Transfer-Encoding: chunked
 
 {
-  "title": "ValidationFailed",
+  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+  "title": "One or more validation errors occurred.",
   "status": 400,
-  "errors": [
-    "Summary: The Summary field is required."
-  ],
-  "traceId": "ca3d770cf8c6d555590b6d8ab92ed594"
+  "traceId": "00-deca013d94134a78fc7c8aec27cf2d9d-b89466a9c2762913-00",
+  "errors": {
+    "Summary": [
+      "The Summary field is required."
+    ]
+  }
 }
 
 
-http://localhost:5000/WeatherForecastApiMessage> post -c "{"summary": "hot"}"
+http://localhost:5000/weather-forecast-api-message> post -c "{"summary": "coooool"}"
 HTTP/1.1 201 Created
 Content-Type: application/json; charset=utf-8
-Date: Sat, 04 Jun 2022 12:28:53 GMT
-Location: /WeatherForecastApiMessage/11
+Date: Fri, 20 Oct 2023 08:38:20 GMT
+Location: /weather-forecast-api-message/11
 Server: Kestrel
 Transfer-Encoding: chunked
 
@@ -131,17 +152,17 @@ Transfer-Encoding: chunked
   "id": "11",
   "links": [
     {
-      "href": "/WeatherForecastApiMessage/11",
+      "href": "/weather-forecast-api-message/11",
       "rel": "self"
     }
   ]
 }
 
 
-http://localhost:5000/WeatherForecastApiMessage> get 11
+http://localhost:5000/weather-forecast-api-message> get 11
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
-Date: Sat, 04 Jun 2022 12:29:24 GMT
+Date: Fri, 20 Oct 2023 08:38:24 GMT
 Server: Kestrel
 Transfer-Encoding: chunked
 
@@ -150,15 +171,15 @@ Transfer-Encoding: chunked
   "date": null,
   "temperatureC": 0,
   "temperatureF": 32,
-  "summary": "hot"
+  "summary": "coooool"
 }
 
 
-http://localhost:5000/WeatherForecastApiMessage> delete 12
+http://localhost:5000/weather-forecast-api-message> delete 12
 HTTP/1.1 404 Not Found
 Cache-Control: no-cache
 Content-Type: application/problem+json; charset=utf-8
-Date: Sat, 04 Jun 2022 12:29:48 GMT
+Date: Fri, 20 Oct 2023 08:38:36 GMT
 Expires: -1
 Pragma: no-cache
 Server: Kestrel
@@ -168,9 +189,8 @@ Transfer-Encoding: chunked
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
   "title": "Not Found",
   "status": 404,
-  "traceId": "5f2f4caf15bb46c35e77b5eb8a6a532f"
+  "traceId": "00-11152ee19a3b49a891e2a57cd860e8f2-8f806729dd06c2d8-00"
 }
 
-
-http://localhost:5000/WeatherForecastApiMessage> exit
+http://localhost:5000/weather-forecast-api-message> exit
 ```
