@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Net.Http.Headers;
+using System.Collections.Generic;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -84,11 +84,21 @@ public static class ControllerExtensions
     /// <remarks>The protocol and host is obtained from the current request.</remarks>
     public static string? LinkAtAction(this ControllerBase controller, string actionName, object routeValues)
     {
+        actionName = TrimAsyncSuffix(actionName);
         return controller.Url.Action(
                            new UrlActionContext
                            {
                                Action = actionName,
                                Values = routeValues
                            });
+    }
+
+    private static string TrimAsyncSuffix(string actionName)
+    {
+        if (actionName.EndsWith("Async"))
+        {
+            return actionName.Substring(0, actionName.Length - "Async".Length);
+        }
+        return actionName;
     }
 }
