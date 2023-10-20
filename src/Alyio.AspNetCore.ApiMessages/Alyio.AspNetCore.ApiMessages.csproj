@@ -13,7 +13,7 @@
     <Description>Provides a mechanism to process unhandled exception occured during a HTTP context and write custom API result message.</Description>
     <PackageId>Alyio.AspNetCore.ApiMessages</PackageId>
     <PackageTags>AspNetCore;Api;Messages</PackageTags>
-    <PackageReleaseNotes>Refactor to write machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807.</PackageReleaseNotes>
+    <PackageReleaseNotes> Trim the 'Async' suffix of action name for async methods.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/ousiax/Alyio.AspNetCore.ApiMessages</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
