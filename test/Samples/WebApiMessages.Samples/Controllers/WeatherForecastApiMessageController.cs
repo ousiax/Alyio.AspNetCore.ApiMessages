@@ -5,7 +5,7 @@ using WebApiMessages.Samples.Models;
 
 namespace WebApiMessages.Samples.Controllers;
 
-// [ApiController]
+[ApiController]
 [Route("[controller]")]
 public class WeatherForecastApiMessageController : ControllerBase
 {
@@ -23,7 +23,7 @@ public class WeatherForecastApiMessageController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    [ActionName(nameof(GetWeatherForecastAsync))]
+    //[ActionName(nameof(GetWeatherForecastAsync))]
     public async Task<WeatherForecast> GetWeatherForecastAsync([FromRoute] int id)
     {
         _ = _context.WeatherForecasts ?? throw new NotFoundMessage();
