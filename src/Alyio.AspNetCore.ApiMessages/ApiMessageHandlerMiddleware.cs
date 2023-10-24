@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -20,7 +20,7 @@ sealed class ApiMessageHandlerMiddleware
     }
 
     /// <summary>
-    /// Processes unhandled exception and write <see cref="ProblemDetails"/> to the current <see cref="HttpContext.Response"/>.
+    /// Processes unhandled exception and write <see cref="Microsoft.AspNetCore.Mvc.ProblemDetails"/> to the current <see cref="HttpContext.Response"/>.
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>

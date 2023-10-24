@@ -1,4 +1,6 @@
-﻿namespace Alyio.AspNetCore.ApiMessages;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace Alyio.AspNetCore.ApiMessages;
 
 /// <summary>
 /// Represents an <see cref="IApiMessage"/> interface.
