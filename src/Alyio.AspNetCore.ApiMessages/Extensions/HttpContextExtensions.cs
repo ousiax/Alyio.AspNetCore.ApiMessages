@@ -47,7 +47,11 @@ public static class HttpContextExtensions
         message.ProblemDetails.Extensions["traceId"] = Activity.Current?.Id ?? context.TraceIdentifier;
         // https://datatracker.ietf.org/doc/html/rfc7807#section-3
         // When serialized as a JSON document, that format is identified with the "application/problem+json" media type.
-        return JsonSerializer.SerializeAsync(context.Response.Body, message.ProblemDetails, cancellationToken: context.RequestAborted);
+        return JsonSerializer.SerializeAsync(
+            context.Response.Body,
+            message.ProblemDetails,
+            message.ProblemDetails.GetType(),
+            cancellationToken: context.RequestAborted);
     }
 
     private static Task ClearCacheHeaders(object state)

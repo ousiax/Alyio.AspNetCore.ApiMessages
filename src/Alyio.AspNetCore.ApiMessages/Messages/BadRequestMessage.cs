@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
-using System.Collections.Generic;
 using System.Net;
 
 namespace Alyio.AspNetCore.ApiMessages;
@@ -56,19 +55,19 @@ public sealed class BadRequestMessage : Exception, IApiMessage
     {
         if (modelState.ErrorCount > 0)
         {
-            var errors = new List<string>();
-            foreach (var key in modelState.Keys)
+            this.ProblemDetails = new ValidationProblemDetails(modelState)
             {
-                var stateEntry = modelState[key];
-                foreach (var error in stateEntry!.Errors)
-                {
-                    errors.Add($"{key}: {error.ErrorMessage}");
-                }
+                Title = XMessage.ValidationFailed,
+                Status = (int)HttpStatusCode.BadRequest,
+            };
+
+            if (detail != null)
+            {
+                this.ProblemDetails.Detail = detail;
             }
-            this.ProblemDetails.Extensions["errors"] = errors;
         }
     }
 
     /// <inheritdoc />
-    public ProblemDetails ProblemDetails { get; }
+    public ProblemDetails ProblemDetails { get; private set; }
 }
