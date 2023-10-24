@@ -38,6 +38,7 @@ public class WeatherForecastApiMessageController : ControllerBase
     [HttpPost]
     public async Task<CreatedMessage> PostWeatherForecastAsync([FromBody] WeatherForecast weather)
     {
+        // NOTE: The [ApiController] attribute makes model validation errors automatically trigger an HTTP 400 response. 
         if (!ModelState.IsValid)
         {
             throw new BadRequestMessage(ModelState);
@@ -48,6 +49,23 @@ public class WeatherForecastApiMessageController : ControllerBase
         await _context.WeatherForecasts.AddAsync(weather);
         await _context.SaveChangesAsync();
 
+        // http://localhost:5000/weather-forecast-api-message> post -c "{"summary": "cooooooooooool"}"
+        // HTTP/1.1 201 Created
+        // Content-Type: application/json; charset=utf-8
+        // Date: Tue, 24 Oct 2023 08:38:45 GMT
+        // Location: /weather-forecast-api-message/11
+        // Server: Kestrel
+        // Transfer-Encoding: chunked
+        // 
+        // {
+        //   "id": "11",
+        //   "links": [
+        //     {
+        //       "href": "/weather-forecast-api-message/11",
+        //       "rel": "self"
+        //     }
+        //   ]
+        // }
         return this.CreatedMessageAtAction(nameof(GetWeatherForecastAsync), new { id = weather.Id }, weather.Id.ToString())!;
     }
 
@@ -56,11 +74,49 @@ public class WeatherForecastApiMessageController : ControllerBase
     {
         if (id != weather.Id)
         {
+            // http://localhost:5000/weather-forecast-api-message/10> put -c "{}"
+            // HTTP / 1.1 400 Bad Request
+            // Cache - Control: no - cache
+            // Content - Type: application / problem + json; charset = utf - 8
+            // Date: Tue, 24 Oct 2023 08:31:51 GMT
+            // Expires: -1
+            // Pragma: no - cache
+            // Server: Kestrel
+            // Transfer - Encoding: chunked
+            // 
+            // {
+            //   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+            //   "title": "ValidationFailed",
+            //   "status": 400,
+            //   "traceId": "00-dcb9bbe9d2d19a1c13b1990131d82e39-8f17233259d979ec-00"
+            // }
             throw new BadRequestMessage();
         }
 
+        // NOTE: The [ApiController] attribute makes model validation errors automatically trigger an HTTP 400 response. 
         if (!ModelState.IsValid)
         {
+            // http://localhost:5000/weather-forecast-api-message/10> put -c "{"id": 10}"
+            // HTTP/1.1 400 Bad Request
+            // Cache-Control: no-cache
+            // Content-Type: application/problem+json; charset=utf-8
+            // Date: Tue, 24 Oct 2023 08:33:21 GMT
+            // Expires: -1
+            // Pragma: no-cache
+            // Server: Kestrel
+            // Transfer-Encoding: chunked
+            // 
+            // {
+            //   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+            //   "title": "ValidationFailed",
+            //   "status": 400,
+            //   "traceId": "00-8c2871328b938115780f42e1c383a41f-3deddb83dfb02b25-00",
+            //   "errors": {
+            //     "Summary": [
+            //       "The Summary field is required."
+            //     ]
+            //   }
+            // }
             throw new BadRequestMessage(ModelState);
         }
 
@@ -74,6 +130,22 @@ public class WeatherForecastApiMessageController : ControllerBase
         }
         catch (DbUpdateConcurrencyException) when (!WeatherForecastExists(id))
         {
+            // http://localhost:5000/weather-forecast-api-message/11> put -c "{"id": 11, "summary": "coool"}"
+            // HTTP/1.1 404 Not Found
+            // Cache-Control: no-cache
+            // Content-Type: application/problem+json; charset=utf-8
+            // Date: Tue, 24 Oct 2023 08:36:04 GMT
+            // Expires: -1
+            // Pragma: no-cache
+            // Server: Kestrel
+            // Transfer-Encoding: chunked
+            // 
+            // {
+            //   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+            //   "title": "Not Found",
+            //   "status": 404,
+            //   "traceId": "00-76dc706d91e46ebbb42cfcc34b9f45ab-420dc463c9979a83-00"
+            // }
             throw new NotFoundMessage();
         }
     }
