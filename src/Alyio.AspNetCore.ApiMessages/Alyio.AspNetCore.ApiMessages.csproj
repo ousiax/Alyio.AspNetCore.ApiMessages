@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Copyright>Copyright (c) 2023 Jon.X</Copyright>
     <AssemblyTitle>Alyio.AspNetCore.ApiMessages</AssemblyTitle>
-    <VersionPrefix>7.1.0</VersionPrefix>
+    <VersionPrefix>7.2.0</VersionPrefix>
     <Authors>Jon.X</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <Nullable>enable</Nullable>
