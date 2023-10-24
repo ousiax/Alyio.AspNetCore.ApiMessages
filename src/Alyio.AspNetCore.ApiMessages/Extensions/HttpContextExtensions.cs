@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Net.Http.Headers;
+using System;
 using System.Diagnostics;
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Net.Http.Headers;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -43,12 +43,11 @@ public static class HttpContextExtensions
         }
 
         context.Response.StatusCode = message.ProblemDetails.Status.GetValueOrDefault((int)HttpStatusCode.InternalServerError);
+        context.Response.Headers[HeaderNames.ContentType] = "application/problem+json; charset=utf-8";
         message.ProblemDetails.Extensions["traceId"] = Activity.Current?.Id ?? context.TraceIdentifier;
-        string errorText = JsonSerializer.Serialize(message.ProblemDetails, SourceGenerationContext.Default.ProblemDetails);
         // https://datatracker.ietf.org/doc/html/rfc7807#section-3
         // When serialized as a JSON document, that format is identified with the "application/problem+json" media type.
-        context.Response.Headers[HeaderNames.ContentType] = "application/problem+json; charset=utf-8";
-        return context.Response.WriteAsync(errorText);
+        return JsonSerializer.SerializeAsync(context.Response.Body, message.ProblemDetails, cancellationToken: context.RequestAborted);
     }
 
     private static Task ClearCacheHeaders(object state)

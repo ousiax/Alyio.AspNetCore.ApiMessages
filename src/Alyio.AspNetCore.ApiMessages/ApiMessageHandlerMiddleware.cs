@@ -40,7 +40,6 @@ sealed class ApiMessageHandlerMiddleware
                     _logger.LogWarning("The response has already started, the API message handler will not be executed.");
                     throw;
                 }
-
                 await context.WriteProblemDetailsAsync(message);
                 return;
             }
