@@ -280,6 +280,8 @@ You can throw any exception during a HTTP context at anytime and anywhere. The `
     }
 ```
 
+## Samples
+
 You can also run the sample at `test/Samples/WebApiMessages.Samples/`:
 
 ```console
@@ -308,18 +310,17 @@ For detailed tool info, see https://aka.ms/http-repl-doc
 
 http://localhost:5000/> ls
 .                              []
-oops                           [GET]
 weather-forecast               [GET|POST]
 weather-forecast-api-message   [GET|POST]
 
 http://localhost:5000/> cd weather-forecast-api-message
 /weather-forecast-api-message    [GET|POST]
 
-http://localhost:5000/weather-forecast-api-message> get 20
+http://localhost:5000/weather-forecast-api-message> get 11
 HTTP/1.1 404 Not Found
 Cache-Control: no-cache
 Content-Type: application/problem+json; charset=utf-8
-Date: Fri, 20 Oct 2023 08:32:54 GMT
+Date: Tue, 24 Oct 2023 09:10:05 GMT
 Expires: -1
 Pragma: no-cache
 Server: Kestrel
@@ -329,22 +330,25 @@ Transfer-Encoding: chunked
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
   "title": "Not Found",
   "status": 404,
-  "traceId": "00-2f8215f70a0e65011f461b61e333eab6-756e7aa8687a62ed-00"
+  "traceId": "00-b3e64c172a13c1f90edca65413707114-33402b26d1fe8050-00"
 }
 
 
 http://localhost:5000/weather-forecast-api-message> post -c "{}"
 HTTP/1.1 400 Bad Request
+Cache-Control: no-cache
 Content-Type: application/problem+json; charset=utf-8
-Date: Fri, 20 Oct 2023 08:38:04 GMT
+Date: Tue, 24 Oct 2023 09:10:24 GMT
+Expires: -1
+Pragma: no-cache
 Server: Kestrel
 Transfer-Encoding: chunked
 
 {
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
-  "title": "One or more validation errors occurred.",
+  "title": "ValidationFailed",
   "status": 400,
-  "traceId": "00-deca013d94134a78fc7c8aec27cf2d9d-b89466a9c2762913-00",
+  "traceId": "00-a3a20de07e19661eaa279e12af433abb-14632dd52e784606-00",
   "errors": {
     "Summary": [
       "The Summary field is required."
@@ -356,7 +360,7 @@ Transfer-Encoding: chunked
 http://localhost:5000/weather-forecast-api-message> post -c "{"summary": "coooool"}"
 HTTP/1.1 201 Created
 Content-Type: application/json; charset=utf-8
-Date: Fri, 20 Oct 2023 08:38:20 GMT
+Date: Tue, 24 Oct 2023 09:10:37 GMT
 Location: /weather-forecast-api-message/11
 Server: Kestrel
 Transfer-Encoding: chunked
@@ -375,7 +379,7 @@ Transfer-Encoding: chunked
 http://localhost:5000/weather-forecast-api-message> get 11
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
-Date: Fri, 20 Oct 2023 08:38:24 GMT
+Date: Tue, 24 Oct 2023 09:10:51 GMT
 Server: Kestrel
 Transfer-Encoding: chunked
 
@@ -392,7 +396,7 @@ http://localhost:5000/weather-forecast-api-message> delete 12
 HTTP/1.1 404 Not Found
 Cache-Control: no-cache
 Content-Type: application/problem+json; charset=utf-8
-Date: Fri, 20 Oct 2023 08:38:36 GMT
+Date: Tue, 24 Oct 2023 09:11:03 GMT
 Expires: -1
 Pragma: no-cache
 Server: Kestrel
@@ -402,8 +406,7 @@ Transfer-Encoding: chunked
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
   "title": "Not Found",
   "status": 404,
-  "traceId": "00-11152ee19a3b49a891e2a57cd860e8f2-8f806729dd06c2d8-00"
+  "traceId": "00-4bee59139386ee3ed6c4d9eecce23e34-5c0e3bf4433e921e-00"
 }
 
-http://localhost:5000/weather-forecast-api-message> exit
 ```
