@@ -73,7 +73,7 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
     }
 
     [Fact]
-    public async Task Test_Endpoints_InternalServerError_Oops()
+    public async Task Test_Endpoints_InternalServerError_Oops_Async()
     {
         var requestUri = "/weather-forecast-api-message/oops";
         var client = _factory.CreateClient();
@@ -87,5 +87,27 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
         Assert.Equal("Internal Server Error", message!.Title);
 
         // Assert.Equal(nameof(System.InvalidOperationException), message!.Extensions["exceptionType"]!.ToString());
+    }
+
+    [Fact]
+    public async Task Test_Endpoints_Unauthorized_Async()
+    {
+        var requestUri = "/weather-forecast-api-message/unauthorized";
+        var client = _factory.CreateClient();
+
+        var response = await client.GetAsync(requestUri);
+
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Test_Endpoints_Forbidden_Async()
+    {
+        var requestUri = "/weather-forecast-api-message/forbidden";
+        var client = _factory.CreateClient();
+
+        var response = await client.GetAsync(requestUri);
+
+        Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }
 }

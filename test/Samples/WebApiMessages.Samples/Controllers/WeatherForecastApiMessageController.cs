@@ -164,9 +164,74 @@ public class WeatherForecastApiMessageController : ControllerBase
         await _context.SaveChangesAsync();
     }
 
+    [Route("unauthorized")]
+    public void UnauthorizedMessage()
+    {
+        // http://localhost:5000/weather-forecast-api-message> post unauthorized -c "{}"
+        // HTTP/1.1 401 Unauthorized
+        // Cache-Control: no-cache
+        // Content-Type: application/problem+json; charset=utf-8
+        // Date: Tue, 24 Oct 2023 08:46:53 GMT
+        // Expires: -1
+        // Pragma: no-cache
+        // Server: Kestrel
+        // Transfer-Encoding: chunked
+        // 
+        // {
+        //   "type": "https://datatracker.ietf.org/doc/html/rfc7235#section-3.1",
+        //   "title": "Unauthorized",
+        //   "status": 401,
+        //   "detail": "Oops, something wrong.",
+        //   "traceId": "00-15af5b9926042f4768e5e3146ffc0e79-d5358830ba9105c1-00"
+        // }
+        throw new UnauthorizedMessage("Oops, something wrong.");
+    }
+
+    [Route("forbidden")]
+    public void ForbiddenMessage()
+    {
+        // http://localhost:5000/weather-forecast-api-message> get forbidden
+        // HTTP/1.1 403 Forbidden
+        // Cache-Control: no-cache
+        // Content-Type: application/problem+json; charset=utf-8
+        // Date: Tue, 24 Oct 2023 08:46:33 GMT
+        // Expires: -1
+        // Pragma: no-cache
+        // Server: Kestrel
+        // Transfer-Encoding: chunked
+        // 
+        // {
+        //   "type": "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.3",
+        //   "title": "Forbidden",
+        //   "status": 403,
+        //   "detail": "Oops, something wrong.",
+        //   "traceId": "00-0ac73e5f90fbd604cf5a984afea1c61c-1e4f7eb6bcfb025f-00"
+        // }
+        throw new ForbiddenMessage("Oops, something wrong.");
+    }
+
     [HttpGet("oops")]
     public void Oops()
     {
+        // http://localhost:5000/weather-forecast-api-message> get oops
+        // HTTP/1.1 500 Internal Server Error
+        // Cache-Control: no-store, no-cache
+        // Content-Type: application/problem+json; charset=utf-8
+        // Date: Tue, 24 Oct 2023 08:45:05 GMT
+        // Expires: -1
+        // Pragma: no-cache
+        // Server: Kestrel
+        // Transfer-Encoding: chunked
+        // 
+        // {
+        //   "type": "https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1",
+        //   "title": "Internal Server Error",
+        //   "status": 500,
+        //   "detail": "System.InvalidOperationException: Oops, something wrong.
+        //    at WebApiMessages.Samples.Controllers.WeatherForecastApiMessageController.Oops() . . .",
+        //   "exceptionType": "System.InvalidOperationException",
+        //   "traceId": "00-9e1f69c7a4935df87f24b569518a66d3-463ec76137670a25-00"
+        // }
         throw new InvalidOperationException("Oops, something wrong.");
     }
 
