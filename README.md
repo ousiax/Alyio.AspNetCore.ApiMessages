@@ -10,7 +10,7 @@ You can throw any exception during a HTTP context if you want, and if the `IApiM
 dotnet add package Alyio.AspNetCore.ApiMessages --version 7.2.0
 ```
 
-To use `Alyio.AspNetCore.ApiMessage`, just call `app.UseApiMessageHandler` in `Startup.Configure` as below.
+To use `Alyio.AspNetCore.ApiMessage`, just call `app.UseApiMessageHandler` in `Startup.Configure` as below. To handle unknown exception during a HTTP context, configure the `ExceptionHandlerOptions.ExceptionHandler` with `Alyio.AspNetCore.ApiMessages.ExceptionHandler.WriteUnhandledMessageAsync`.
 
 ```cs
 // . . .
@@ -251,7 +251,7 @@ For `201 Created` message,
 
 ## 500 Internal Server Error
 
-You can throw any exception during a HTTP context at anytime and anywhere.
+You can throw any exception during a HTTP context at anytime and anywhere. The `ExceptionHandler.WriteUnhandledMessageAsync` will intercept the exception and write an a 500 Internal Server Error message.
 
 ```cs
     [HttpGet("oops")]
