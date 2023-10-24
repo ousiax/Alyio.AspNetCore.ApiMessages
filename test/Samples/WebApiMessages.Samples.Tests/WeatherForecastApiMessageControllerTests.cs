@@ -75,15 +75,17 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
     [Fact]
     public async Task Test_Endpoints_InternalServerError_Oops()
     {
-        var requestUri = "weather-forecast-api-message/1989";
+        var requestUri = "/weather-forecast-api-message/oops";
         var client = _factory.CreateClient();
 
         var response = await client.GetAsync(requestUri);
 
-        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
 
-        var message = await response.Content.ReadFromJsonAsync<ProblemDetails>();
+        var message = await response.Content.ReadFromJsonAsync<ProblemDetails>(new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-        Assert.Equal("Not Found", message!.Title);
+        Assert.Equal("Internal Server Error", message!.Title);
+
+        // Assert.Equal(nameof(System.InvalidOperationException), message!.Extensions["exceptionType"]!.ToString());
     }
 }

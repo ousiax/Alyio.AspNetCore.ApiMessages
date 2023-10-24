@@ -1,21 +1,19 @@
 using Alyio.AspNetCore.ApiMessages;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 using WebApiMessages.Samples.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.Configure<ApiBehaviorOptions>(opt =>
-{
-    opt.InvalidModelStateResponseFactory = ctx =>
-    {
-        ctx.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-        return new JsonResult(new BadRequestMessage(ctx.ModelState).ProblemDetails);
-    };
-});
+//builder.Services.Configure<ApiBehaviorOptions>(opt =>
+//{
+//    opt.InvalidModelStateResponseFactory = ctx =>
+//    {
+//        ctx.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+//        return new JsonResult(new BadRequestMessage(ctx.ModelState).ProblemDetails);
+//    };
+//});
 
 #pragma warning disable ASP0000
 builder.Services.AddDbContext<WeatherForecastDbContext>(opt => opt.UseInMemoryDatabase("WeatherForecast"));

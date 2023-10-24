@@ -92,6 +92,12 @@ public class WeatherForecastApiMessageController : ControllerBase
         await _context.SaveChangesAsync();
     }
 
+    [HttpGet("oops")]
+    public void Oops()
+    {
+        throw new InvalidOperationException("Oops, something wrong.");
+    }
+
     private bool WeatherForecastExists(int id)
     {
         return (_context.WeatherForecasts?.Any(w => w.Id == id)).GetValueOrDefault();
