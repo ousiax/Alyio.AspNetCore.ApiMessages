@@ -164,7 +164,7 @@ public class WeatherForecastApiMessageController : ControllerBase
         await _context.SaveChangesAsync();
     }
 
-    [Route("unauthorized")]
+    [HttpGet("unauthorized")]
     public void UnauthorizedMessage()
     {
         // http://localhost:5000/weather-forecast-api-message> post unauthorized -c "{}"
@@ -187,7 +187,7 @@ public class WeatherForecastApiMessageController : ControllerBase
         throw new UnauthorizedMessage("Oops, something wrong.");
     }
 
-    [Route("forbidden")]
+    [HttpGet("forbidden")]
     public void ForbiddenMessage()
     {
         // http://localhost:5000/weather-forecast-api-message> get forbidden
