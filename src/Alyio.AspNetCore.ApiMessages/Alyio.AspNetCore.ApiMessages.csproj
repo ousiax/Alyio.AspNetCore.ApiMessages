@@ -12,8 +12,7 @@
     <AssemblyName>Alyio.AspNetCore.ApiMessages</AssemblyName>
     <Description>Provides a mechanism to process unhandled exception occured during a HTTP context and write custom API result message.</Description>
     <PackageId>Alyio.AspNetCore.ApiMessages</PackageId>
-    <PackageTags>AspNetCore;Api;Messages</PackageTags>
-    <PackageReleaseNotes> Trim the 'Async' suffix of action name for async methods.</PackageReleaseNotes>
+    <PackageTags>AspNetCore;Api;Messages;Problem Details;rfc7807</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/ousiax/Alyio.AspNetCore.ApiMessages</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
