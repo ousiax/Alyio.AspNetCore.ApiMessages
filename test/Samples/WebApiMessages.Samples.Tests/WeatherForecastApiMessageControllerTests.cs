@@ -16,7 +16,7 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
     [Fact]
     public async Task Test_Endpoints_NotFound_GetWeatherForecastAsync()
     {
-        var requestUri = "WeatherForecastApiMessage/1989";
+        var requestUri = "weather-forecast-api-message/1989";
         var client = _factory.CreateClient();
 
         var response = await client.GetAsync(requestUri);
@@ -31,7 +31,7 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
     [Fact]
     public async Task Test_Endpoints_ValidationFailed_PostWeatherForecastAsync()
     {
-        var requestUri = "WeatherForecastApiMessage";
+        var requestUri = "weather-forecast-api-message";
         var client = _factory.CreateClient();
 
         var response = await client.PostAsJsonAsync<WeatherForecast>(requestUri, new WeatherForecast { });
@@ -46,7 +46,7 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
     [Fact]
     public async Task Test_Endpoints_201Created_PostWeatherForecastAsync()
     {
-        var postReqUri = "WeatherForecastApiMessage";
+        var postReqUri = "weather-forecast-api-message";
         var client = _factory.CreateClient();
         var weather = new WeatherForecast
         {
@@ -61,7 +61,7 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
 
         var createdMessage = (await postResponse.Content.ReadFromJsonAsync<CreatedMessage>())!;
 
-        Assert.Equal($"/WeatherForecastApiMessage/{createdMessage.Id}", postResponse.Headers.Location!.ToString());
+        Assert.Equal($"/weather-forecast-api-message/{createdMessage.Id}", postResponse.Headers.Location!.ToString());
 
         var getResponse = await client.GetAsync(postResponse.Headers.Location);
 
@@ -75,7 +75,7 @@ public class WeatherForecastApiMessageControllerTests : IClassFixture<WebApplica
     [Fact]
     public async Task Test_Endpoints_InternalServerError_Oops()
     {
-        var requestUri = "WeatherForecastApiMessage/1989";
+        var requestUri = "weather-forecast-api-message/1989";
         var client = _factory.CreateClient();
 
         var response = await client.GetAsync(requestUri);

@@ -10,8 +10,8 @@ public class BasicTests : IClassFixture<WebApplicationFactory<Program>>
     public BasicTests(WebApplicationFactory<Program> factory) => _factory = factory;
 
     [Theory]
-    [InlineData("/WeatherForecastApiMessage")]
-    [InlineData("/WeatherForecastApiMessage/1")]
+    [InlineData("/weather-forecast-api-message")]
+    [InlineData("/weather-forecast-api-message/1")]
     public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
     {
         // Arrange

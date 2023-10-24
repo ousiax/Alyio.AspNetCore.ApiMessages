@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
-using System.Text.RegularExpressions;
 using WebApiMessages.Samples.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,10 +41,15 @@ using (var services = builder.Services.BuildServiceProvider())
 #pragma warning restore ASP0000
 
 // builder.Services.AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
-builder.Services.AddControllers(options =>
-{
-    options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
-});
+builder.Services
+    .AddControllers(options =>
+    {
+        options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
+    }).ConfigureApiBehaviorOptions(o =>
+    {
+        // Suppress the default model state validator
+        o.SuppressModelStateInvalidFilter = true;
+    });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -79,12 +83,3 @@ app.MapControllers();
 app.Run();
 
 public partial class Program { } // Make 'Program' as public, instead of internal.
-
-public class SlugifyParameterTransformer : IOutboundParameterTransformer
-{
-    public string? TransformOutbound(object? value)
-    {
-        // Slugify value
-        return value == null ? null : Regex.Replace(value.ToString()!, "([a-z])([A-Z])", "$1-$2").ToLower();
-    }
-}

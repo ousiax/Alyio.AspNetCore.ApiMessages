@@ -13,14 +13,14 @@ public class OopsControllerTests : IClassFixture<WebApplicationFactory<Program>>
     [Fact]
     public async Task Test_Endpoints_InternalServerError_Oops()
     {
-        var requestUri = "Oops";
+        var requestUri = "oops";
         var client = _factory.CreateClient();
 
         var response = await client.GetAsync(requestUri);
 
         Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
 
-        var message = await response.Content.ReadFromJsonAsync<ProblemDetails>();
+        var message = await response.Content.ReadFromJsonAsync<ProblemDetails>(new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
         Assert.Equal("Internal Server Error", message!.Title);
 
