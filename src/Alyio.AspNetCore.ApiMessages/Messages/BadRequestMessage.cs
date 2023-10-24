@@ -22,6 +22,7 @@ public sealed class BadRequestMessage : Exception, IApiMessage
         {
             Title = XMessage.ValidationFailed,
             Status = (int)HttpStatusCode.BadRequest,
+            Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         };
     }
 
@@ -59,6 +60,7 @@ public sealed class BadRequestMessage : Exception, IApiMessage
             {
                 Title = XMessage.ValidationFailed,
                 Status = (int)HttpStatusCode.BadRequest,
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
             };
 
             if (detail != null)
