@@ -2,7 +2,7 @@
 
 ![Build Status](https://github.com/ousiax/Alyio.AspNetCore.ApiMessages/actions/workflows/ci.yml/badge.svg?branch=main)
 
-The **Alyio.AspNetCore.ApiMessages** provides the mechanism to process unhandled exception occured during a HTTP context and writes machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807.
+The **Alyio.AspNetCore.ApiMessages** provides the mechanism to process unhandled exception occured during a HTTP context and writes machine-readable format for specifying errors in HTTP API responses based on [rfc7807](https://tools.ietf.org/html/rfc7807).
 
 You can throw any exception during a HTTP context if you want, and if the `IApiMessage` has been implemented by the exception, `Alyio.AspNetCore.ApiMessages` will produce a consistent response corresponding to it.
 
@@ -50,22 +50,21 @@ app.Run();
 > }
 > ```
 > 
-> ASP.NET Core MVC uses the [ModelStateInvalidFilter](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.infrastructure.modelstateinvalidfilter) action filter to do the preceding check.
+> ASP.NET Core MVC uses the [`ModelStateInvalidFilter`](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.infrastructure.modelstateinvalidfilter) action filter to do the preceding check.
 >
 > . . .
 >
-> To disable the automatic 400 behavior, set the SuppressModelStateInvalidFilter property to true. Add the  >following highlighted code:
+> To disable the automatic 400 behavior, set the `SuppressModelStateInvalidFilter` property to `true`. Add the following code:
 > 
 > ```cs
 > builder.Services.AddControllers()
 >     .ConfigureApiBehaviorOptions(options =>
 >     {
->         options.SuppressConsumesConstraintForFormFileParameters = true;
->         options.SuppressInferBindingSourcesForParameters = true;
+>         // options.SuppressConsumesConstraintForFormFileParameters = true;
+>         // options.SuppressInferBindingSourcesForParameters = true;
 >         options.SuppressModelStateInvalidFilter = true;
->         options.SuppressMapClientErrors = true;
->         options.ClientErrorMapping[StatusCodes.Status404NotFound].Link =
->             "https://httpstatuses.com/404";
+>         // options.SuppressMapClientErrors = true;
+>         // options.ClientErrorMapping[StatusCodes.Status404NotFound].Link = "https://httpstatuses.com/404";
 >     });
 > ```
 
