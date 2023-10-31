@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -16,9 +16,9 @@ public sealed class ForbiddenMessage : Exception, IApiMessage
     {
         this.ProblemDetails = new ProblemDetails
         {
-            Status = (int)HttpStatusCode.Forbidden,
             Title = XMessage.Forbidden,
-            Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.3",
+            Status = StatusCodes.Status403Forbidden,
+            Type = StatusCodeTypes.Status403Forbidden,
         };
     }
 

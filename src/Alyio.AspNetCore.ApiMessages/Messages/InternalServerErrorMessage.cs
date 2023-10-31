@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -16,9 +16,9 @@ public class InternalServerErrorMessage : Exception, IApiMessage
     {
         this.ProblemDetails = new ProblemDetails
         {
-            Status = (int)HttpStatusCode.InternalServerError,
             Title = XMessage.InternalServerError,
-            Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1",
+            Status = StatusCodes.Status500InternalServerError,
+            Type = StatusCodeTypes.Status500InternalServerError,
         };
     }
 

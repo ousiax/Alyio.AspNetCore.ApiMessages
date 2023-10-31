@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -16,9 +16,9 @@ public class NotFoundMessage : Exception, IApiMessage
     {
         this.ProblemDetails = new ProblemDetails
         {
-            Status = (int)HttpStatusCode.NotFound,
             Title = XMessage.NotFound,
-            Type = "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+            Status = StatusCodes.Status404NotFound,
+            Type = StatusCodeTypes.Status404NotFound,
         };
     }
 

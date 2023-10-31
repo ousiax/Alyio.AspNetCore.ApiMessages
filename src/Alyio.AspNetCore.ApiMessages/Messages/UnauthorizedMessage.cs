@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -18,9 +18,9 @@ public sealed class UnauthorizedMessage : Exception, IApiMessage
     {
         this.ProblemDetails = new ProblemDetails
         {
-            Status = (int)HttpStatusCode.Unauthorized,
             Title = XMessage.Unauthorized,
-            Type = "https://datatracker.ietf.org/doc/html/rfc7235#section-3.1",
+            Status = StatusCodes.Status401Unauthorized,
+            Type = StatusCodeTypes.Status401Unauthorized,
         };
     }
 

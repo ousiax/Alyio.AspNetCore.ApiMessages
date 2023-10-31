@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
-using System.Net;
 
 namespace Alyio.AspNetCore.ApiMessages;
 
@@ -21,8 +21,8 @@ public sealed class BadRequestMessage : Exception, IApiMessage
         this.ProblemDetails = new ProblemDetails
         {
             Title = XMessage.ValidationFailed,
-            Status = (int)HttpStatusCode.BadRequest,
-            Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+            Status = StatusCodes.Status400BadRequest,
+            Type = StatusCodeTypes.Status400BadRequest,
         };
     }
 
@@ -59,8 +59,8 @@ public sealed class BadRequestMessage : Exception, IApiMessage
             this.ProblemDetails = new ValidationProblemDetails(modelState)
             {
                 Title = XMessage.ValidationFailed,
-                Status = (int)HttpStatusCode.BadRequest,
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+                Status = StatusCodes.Status400BadRequest,
+                Type = StatusCodeTypes.Status400BadRequest,
             };
 
             if (detail != null)
