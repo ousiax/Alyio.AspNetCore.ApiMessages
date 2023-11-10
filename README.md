@@ -36,6 +36,21 @@ app.UseApiMessageHandler();
 app.Run();
 ```
 
+NOTE: You can also use the exception filter using `MvcOptions.Filters`, instead of the middleware as below:
+
+```cs
+builder.Services
+    .AddControllers(options =>
+    {
+        options.Filters.Add(typeof(ApiMessageFilterAttribute));
+        options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
+    }).ConfigureApiBehaviorOptions(o =>
+    {
+        // Suppress the default model state validator
+        o.SuppressModelStateInvalidFilter = true;
+    });
+```
+
 
 ## 400 Bad Request
 
