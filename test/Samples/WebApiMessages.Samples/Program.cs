@@ -1,4 +1,5 @@
 using Alyio.AspNetCore.ApiMessages;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using WebApiMessages.Samples.Models;
@@ -52,6 +53,9 @@ builder.Services
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+#if NET8_0
+builder.Services.AddExceptionHandler<InternalServerErrorMessageExceptionHandler>();
+#endif
 
 var app = builder.Build();
 
@@ -61,7 +65,11 @@ var app = builder.Build();
 //}
 //else
 //{
+#if NET8_0
+app.UseExceptionHandler("/Error");
+#else
 app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync });
+#endif
 app.UseApiMessageHandler();
 //}
 

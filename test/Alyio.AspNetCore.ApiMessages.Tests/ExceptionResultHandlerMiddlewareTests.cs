@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +19,23 @@ namespace Alyio.AspNetCore.ApiMessages.Tests
         public async Task ExceptionResultHandlerMiddleware_Test()
         {
             var builder = new WebHostBuilder()
+                .ConfigureServices((ctx, services) =>
+                {
+#if NET8_0
+                    services.AddExceptionHandler<InternalServerErrorMessageExceptionHandler>();
+#endif
+                })
                 .Configure(app =>
                {
                    //var logF = app.ApplicationServices.GetService<ILoggerFactory>();
                    //logF.AddConsole(minLevel: LogLevel.Debug);
+#if NET8_0
+                   app.UseExceptionHandler("/Error");
+#endif
+
+#if !NET8_0
                    app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync });
+#endif
                    app.UseApiMessageHandler();
 
                    app.Map("/201", x =>

@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -15,6 +19,42 @@ namespace Alyio.AspNetCore.ApiMessages;
 public static class HttpContextExtensions
 {
     private readonly static JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+
+    /// <summary>
+    /// Writes machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807.
+    /// </summary>
+    /// <param name="context">The <see cref="HttpContext"/></param>
+    /// <param name="exception">The <see cref="Exception"/></param>
+    /// <param name="clearCacheHeaders">Clear Cache-Control, Pragma, Expires and ETag headers. Default is true.</param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
+    public static Task WriteExceptionAsProblemDetailsAsync(this HttpContext context, Exception exception, bool clearCacheHeaders = true)
+    {
+        var message = new InternalServerErrorMessage(exception.Message);
+        message.ProblemDetails.Extensions["exceptionType"] = exception.GetType().FullName;
+
+        var errors = new List<string>();
+        if (exception is AggregateException aggregateException)
+        {
+            aggregateException.Flatten().Handle(e =>
+            {
+                errors.Add(e.Message);
+                return true;
+            });
+            message.ProblemDetails.Extensions["errors"] = errors.Distinct().ToList();
+        }
+
+        if (context.RequestServices.GetRequiredService<IHostEnvironment>().IsDevelopment())
+        {
+            message.ProblemDetails.Detail = exception.ToString();
+        }
+        else
+        {
+            message.ProblemDetails.Detail = exception.Message;
+        }
+
+        return context.WriteProblemDetailsAsync(message, clearCacheHeaders);
+    }
 
     /// <summary>
     /// Writes machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807.
