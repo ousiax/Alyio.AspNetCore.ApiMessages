@@ -25,8 +25,8 @@ jobs:
         run: dotnet --info
       - name: Test
         run: |
-          dotnet_version=${{ matrix.dotnet_version }}
-          framework=net${dotnet_version%.x} # remove .x from the end
+          version=${{ matrix.dotnet-version }}
+          framework=net${version%.x} # remove .x from the end
           dotnet test -f ${framework} /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
       - name: Pack
         run: dotnet pack -c Release src/Alyio.AspNetCore.ApiMessages/
