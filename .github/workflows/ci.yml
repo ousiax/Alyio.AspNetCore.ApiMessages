@@ -24,6 +24,9 @@ jobs:
       - name: Dipslay dotnet info
         run: dotnet --info
       - name: Test
-        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+        run: |
+          dotnet_version=${{ matrix.dotnet_version }}
+          framework=net${dotnet_version%.x} # remove .x from the end
+          dotnet test -f ${framework} /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
       - name: Pack
-        run: dotnet pack -c release src/Alyio.AspNetCore.ApiMessages/
+        run: dotnet pack -c Release src/Alyio.AspNetCore.ApiMessages/
