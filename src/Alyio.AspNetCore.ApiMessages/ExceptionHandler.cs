@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Alyio.AspNetCore.ApiMessages;
-
-#pragma warning disable CS1574
 
 /// <summary>
 /// <see cref="Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware"/>.
@@ -40,7 +38,7 @@ public static class ExceptionHandler
             message.ProblemDetails.Extensions["errors"] = errors.Distinct().ToList();
         }
 
-        if (context.RequestServices.GetService<IHostingEnvironment>().IsDevelopment())
+        if (context.RequestServices.GetRequiredService<IHostEnvironment>().IsDevelopment())
         {
             message.ProblemDetails.Detail = error.ToString();
         }

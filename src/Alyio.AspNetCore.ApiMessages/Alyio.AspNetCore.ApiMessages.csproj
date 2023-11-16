@@ -4,7 +4,7 @@
     <AssemblyTitle>Alyio.AspNetCore.ApiMessages</AssemblyTitle>
     <VersionPrefix>7.2.0</VersionPrefix>
     <Authors>Jon.X</Authors>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -27,12 +27,9 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.0" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="6.0.0" />
-    <PackageReference Include="System.Text.Json" Version="6.0.4" />
-  </ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup> 
 
 </Project>
