@@ -12,13 +12,7 @@ dotnet add package Alyio.AspNetCore.ApiMessages
 
 To use `Alyio.AspNetCore.ApiMessage`, just call `app.UseApiMessageHandler` in `Startup.Configure` as below.
 
-> To handle unknown exception during a HTTP context, configure the `ExceptionHandlerOptions.ExceptionHandler` with `Alyio.AspNetCore.ApiMessages.ExceptionHandler.WriteUnhandledMessageAsync`.
-> For .NET 8.0, you can also use the [`IServiceCollection.AddExceptionHandler<T>`](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-8.0#iexceptionhandler) to handle errors in ASP.NET Core.
-
-
 ```cs
-// . . .
-
 #if NET8_0
 builder.Services.AddExceptionHandler<InternalServerErrorMessageExceptionHandler>();
 #endif
@@ -32,11 +26,14 @@ app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = Excepti
 #endif
 app.UseApiMessageHandler();
 
-
 // . . .
 
 app.Run();
 ```
+
+- To handle unknown exception during a HTTP context, configure the `ExceptionHandlerOptions.ExceptionHandler` with `Alyio.AspNetCore.ApiMessages.ExceptionHandler.WriteUnhandledMessageAsync`.
+- For .NET 8.0, you can also use the [`IServiceCollection.AddExceptionHandler<T>`](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-8.0#iexceptionhandler) to handle errors in ASP.NET Core.
+
 
 NOTE: You can also use the exception filter using `MvcOptions.Filters`, instead of the middleware as below:
 
