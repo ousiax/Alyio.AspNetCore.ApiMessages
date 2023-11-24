@@ -7,29 +7,31 @@ The **Alyio.AspNetCore.ApiMessages** provides the mechanism to process unhandled
 You can throw any exception during a HTTP context if you want, and if the `IApiMessage` has been implemented by the exception, `Alyio.AspNetCore.ApiMessages` will produce a consistent response corresponding to it.
 
 ```console
-dotnet add package Alyio.AspNetCore.ApiMessages --version 7.2.0
+dotnet add package Alyio.AspNetCore.ApiMessages
 ```
 
-To use `Alyio.AspNetCore.ApiMessage`, just call `app.UseApiMessageHandler` in `Startup.Configure` as below. To handle unknown exception during a HTTP context, configure the `ExceptionHandlerOptions.ExceptionHandler` with `Alyio.AspNetCore.ApiMessages.ExceptionHandler.WriteUnhandledMessageAsync`.
+To use `Alyio.AspNetCore.ApiMessage`, just call `app.UseApiMessageHandler` in `Startup.Configure` as below.
+
+> To handle unknown exception during a HTTP context, configure the `ExceptionHandlerOptions.ExceptionHandler` with `Alyio.AspNetCore.ApiMessages.ExceptionHandler.WriteUnhandledMessageAsync`.
+> For .NET 8.0, you can also use the [`IServiceCollection.AddExceptionHandler<T>`](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-8.0#iexceptionhandler) to handle errors in ASP.NET Core.
+
 
 ```cs
 // . . .
 
-var builder = WebApplication.CreateBuilder(args);
-
-// . . .
+#if NET8_0
+builder.Services.AddExceptionHandler<InternalServerErrorMessageExceptionHandler>();
+#endif
 
 var app = builder.Build();
 
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseDeveloperExceptionPage();
-//}
-//else
-//{
+#if NET8_0
+app.UseExceptionHandler("/Error");
+#else
 app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ExceptionHandler.WriteUnhandledMessageAsync });
+#endif
 app.UseApiMessageHandler();
-//}
+
 
 // . . .
 
